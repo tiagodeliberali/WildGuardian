@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 762686364865463875}
   - component: {fileID: 762686364865463873}
   m_Layer: 0
-  m_Name: Gem
+  m_Name: Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.764151, g: 0.38879436, b: 0.28403345, a: 1}
+  m_Color: {r: 0.28235298, g: 0.45367336, b: 0.7647059, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afb4adb1d0ffae499edafcb9b99c3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 9aceec8466871b044acd49ad42450848, type: 2}
+  Item: {fileID: 11400000, guid: c99c6c1b1a86f9c4ca90018a2bcdfb57, type: 2}

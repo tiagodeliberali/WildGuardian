@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InvetoryItemRemoveController : MonoBehaviour
+public class InvetoryItemController : MonoBehaviour
 {
     Item item;
 
@@ -21,7 +21,7 @@ public class InvetoryItemRemoveController : MonoBehaviour
         RemoveItem();
 	}
 
-	public void AddItem(Item item)
+	public void AssociateItem(Item item)
     {
         this.item = item;
     }

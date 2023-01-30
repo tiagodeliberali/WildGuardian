@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 
-using Mono.Cecil;
-
 using TMPro;
 
 using UnityEngine;
@@ -10,14 +8,16 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
+
     public List<Item> items = new List<Item>();
 
+	// Used to instantiate items UI on the inventory
 	public Transform ItemContent;
 	public GameObject InventoryItem;
 
 	public Toggle EnableRemove;
 
-	public InvetoryItemRemoveController[] InventoryItems;
+	public InvetoryItemController[] InventoryItems;
 
 
 	private void Awake()
@@ -30,9 +30,9 @@ public class InventoryManager : MonoBehaviour
 		items.Add(item);
 	}
 
-	public bool Remove(Item item)
+	public void Remove(Item item)
 	{
-		return items.Remove(item);
+		items.Remove(item);
 	}
 
 	public void ListItems()
@@ -73,11 +73,11 @@ public class InventoryManager : MonoBehaviour
 
 	private void SetInventoryItems()
 	{
-		this.InventoryItems = ItemContent.GetComponentsInChildren<InvetoryItemRemoveController>();
+		this.InventoryItems = ItemContent.GetComponentsInChildren<InvetoryItemController>();
 
 		for (int i = 0; i < items.Count; i++)
 		{
-			InventoryItems[i].AddItem(items[i]);
+			InventoryItems[i].AssociateItem(items[i]);
 		}
 	}
 }
