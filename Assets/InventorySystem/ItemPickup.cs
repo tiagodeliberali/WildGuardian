@@ -4,8 +4,9 @@ public class ItemPickup : MonoBehaviour
 {
     public Item Item;
 
-	private void OnMouseDown()
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		Debug.Log("Trigger happened!");
 		Pickup();
 	}
 

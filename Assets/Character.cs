@@ -11,11 +11,6 @@ public class Character : MonoBehaviour
 		UpdatePosition();
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		Debug.Log("Trigger happened!");
-	}
-
 	private void UpdatePosition()
 	{
 		var position = new Vector3();
