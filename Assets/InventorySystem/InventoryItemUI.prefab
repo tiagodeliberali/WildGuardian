@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88290dc380268d4d9fa046634f39263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RemoveButtom: {fileID: 5185858650505647653}
+  RemoveButton: {fileID: 5185858650505647653}
 --- !u!1 &5185858649905765635
 GameObject:
   m_ObjectHideFlags: 0

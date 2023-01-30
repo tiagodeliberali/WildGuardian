@@ -3,21 +3,18 @@ using UnityEngine.UI;
 
 public class InvetoryItemController : MonoBehaviour
 {
-    Item item;
-
-    public Button RemoveButtom;
+    private Item item;
+    public Button RemoveButton;
 
     public void RemoveItem()
     {
-        InventoryManager.Instance.Remove(item);
-
-        Destroy(gameObject);
+        InventoryManager.Instance.Remove(this);
+		Destroy(gameObject);
     }
 
 	public void UseItem()
 	{
-        Debug.Log("Item used!");
-
+        Debug.Log($"Item used! {item.name}");
         RemoveItem();
 	}
 
@@ -25,4 +22,9 @@ public class InvetoryItemController : MonoBehaviour
     {
         this.item = item;
     }
+
+    public void SetRemoveButtonActive(bool active)
+    {
+		RemoveButton.gameObject.SetActive(active);
+	}
 }

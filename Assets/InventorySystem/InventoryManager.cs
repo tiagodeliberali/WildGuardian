@@ -2,23 +2,22 @@ using System.Collections.Generic;
 
 using TMPro;
 
+using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-
-    public List<Item> items = new List<Item>();
+	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
 
 	// Used to instantiate items UI on the inventory
-	public Transform ItemContent;
+	public Transform ItemPlaceholder;
 	public GameObject InventoryItem;
 
+	// UI
 	public Toggle EnableRemove;
-
-	public InvetoryItemController[] InventoryItems;
-
 
 	private void Awake()
 	{
@@ -27,57 +26,31 @@ public class InventoryManager : MonoBehaviour
 
 	public void Add(Item item)
 	{
-		items.Add(item);
+		GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
+
+		var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+		itemIcon.sprite = item.icon;
+
+		var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+		itemName.text = item.itemName;
+
+		var controller = obj.GetComponent<InvetoryItemController>();
+		controller.AssociateItem(item);
+		controller.SetRemoveButtonActive(EnableRemove.isOn);
+
+		InventoryItems.Add(controller);
 	}
 
-	public void Remove(Item item)
+	public void Remove(InvetoryItemController item)
 	{
-		items.Remove(item);
-	}
-
-	public void ListItems()
-	{
-		foreach (Transform item in ItemContent)
-		{
-			Destroy(item.gameObject);
-		}
-
-		foreach (Item item in items)
-		{
-			GameObject obj = Instantiate(InventoryItem, ItemContent);
-			
-			var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-			itemIcon.sprite = item.icon;
-
-			var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-			itemName.text = item.itemName;
-
-			var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-			if (EnableRemove.isOn)
-			{
-				removeButton.gameObject.SetActive(true);
-			}
-		}
-
-		SetInventoryItems();
+		InventoryItems.Remove(item);
 	}
 
 	public void EnableItemsRemove()
 	{
-		foreach (Transform item in ItemContent)
+		foreach (var item in InventoryItems)
 		{
-			item.Find("RemoveButton").gameObject.SetActive(EnableRemove.isOn);
-		}
-	}
-
-	private void SetInventoryItems()
-	{
-		this.InventoryItems = ItemContent.GetComponentsInChildren<InvetoryItemController>();
-
-		for (int i = 0; i < items.Count; i++)
-		{
-			InventoryItems[i].AssociateItem(items[i]);
+			item.SetRemoveButtonActive(EnableRemove.isOn);
 		}
 	}
 }
