@@ -7,13 +7,19 @@ public class BuyTerrainManager : MonoBehaviour
     public GameObject buyTerrainUI;
 
 	private TextMeshProUGUI buyTerrainAmount;
-    private TerrainController terrain;
+	private Transform okButton;
+	private Transform notEnoughMoneyUI;
+
+	private TerrainController terrain;
 
     public static BuyTerrainManager Instance;
 
 	private void Awake()
 	{
         Instance = this;
+
+		okButton = buyTerrainUI.transform.Find("OkButton");
+		notEnoughMoneyUI = buyTerrainUI.transform.Find("NotEnoughMoney");
 		buyTerrainAmount = buyTerrainUI.transform.Find("Amount").GetComponent<TextMeshProUGUI>();
 	}
 
@@ -22,7 +28,11 @@ public class BuyTerrainManager : MonoBehaviour
         this.terrain = terrain;
 		buyTerrainAmount.text = terrain.Amount.ToString();
 
-        ShowUI();
+		bool canBuyTerrain = Character.Instance.CanSpendMoney(terrain.Amount);
+		okButton.gameObject.SetActive(canBuyTerrain);
+		notEnoughMoneyUI.gameObject.SetActive(!canBuyTerrain);
+
+		ShowUI();
 	}
 
     public void Close()
@@ -32,7 +42,9 @@ public class BuyTerrainManager : MonoBehaviour
 
     public void Buy()
     {
-        terrain?.Buy();
+		Character.Instance.SpendMoney(terrain.Amount);
+
+		terrain?.Buy();
         terrain = null;
 
 		HideUI();
