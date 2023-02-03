@@ -1,20 +1,17 @@
-using System;
-
 using Assets;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
 {
 	private Vector2 movement;
-	private Rigidbody2D rigidbody;
+	private Rigidbody2D characterRigidBody;
 	private Animator animator;
 
 	private void Awake()
 	{
-		rigidbody = GetComponent<Rigidbody2D>();
+		characterRigidBody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 	}
 
@@ -36,8 +33,8 @@ public class Character : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		rigidbody.MovePosition(
-			rigidbody.position +
+		characterRigidBody.MovePosition(
+			characterRigidBody.position +
 			Time.fixedDeltaTime * GameConfiguration.DeltaTimeVelocity * movement);
 	}
 }
