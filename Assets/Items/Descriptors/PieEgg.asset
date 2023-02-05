@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbf0da52cf5435e42ab37850e6e67db2, type: 3}
-  m_Name: Shield
+  m_Name: PieEgg
   m_EditorClassIdentifier: 
-  id: 123
-  itemName: Escudo
-  type: 1
-  icon: {fileID: 21300000, guid: b97c91e8b348f3f4ebdc11f5c82182cd, type: 3}
+  id: 1
+  itemName: Torta
+  type: 0
+  icon: {fileID: -694303968, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}

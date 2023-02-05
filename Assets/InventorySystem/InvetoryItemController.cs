@@ -4,9 +4,10 @@ using UnityEngine.UI;
 public class InvetoryItemController : MonoBehaviour
 {
     private Item item;
+    private Button button;
     public Button RemoveButton;
 
-    public void RemoveItem()
+	public void RemoveItem()
     {
         InventoryManager.Instance.Remove(this);
 		Destroy(gameObject);
@@ -21,10 +22,16 @@ public class InvetoryItemController : MonoBehaviour
 	public void AssociateItem(Item item)
     {
         this.item = item;
-    }
+		button = gameObject.GetComponent<Button>();
+	}
 
     public void SetRemoveButtonActive(bool active)
     {
 		RemoveButton.gameObject.SetActive(active);
+	}
+
+	public void EnableButtonIfType(ItemType type)
+	{
+		button.interactable = type == item.type;
 	}
 }

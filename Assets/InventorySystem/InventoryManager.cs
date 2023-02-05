@@ -53,4 +53,12 @@ public class InventoryManager : MonoBehaviour
 			item.SetRemoveButtonActive(EnableRemove.isOn);
 		}
 	}
+
+	public void EnableItemsOfType(ItemType type)
+	{
+		foreach (var item in InventoryItems)
+		{
+			item.EnableButtonIfType(type);
+		}
+	}
 }
