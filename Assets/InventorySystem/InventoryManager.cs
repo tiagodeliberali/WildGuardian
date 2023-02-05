@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
 	public GameObject InventoryItem;
 
 	// UI
+	public GameObject Inventory;
 	public Toggle EnableRemove;
 
 	private void Awake()
@@ -26,13 +27,13 @@ public class InventoryManager : MonoBehaviour
 
 	public void OpenWindow()
 	{
-		gameObject.SetActive(true);
+		Inventory.SetActive(true);
 		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowOpened));
 	}
 
 	public void CloseWindow()
 	{
-		gameObject.SetActive(false);
+		Inventory.SetActive(false);
 		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowClosed));
 	}
 

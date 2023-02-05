@@ -1,3 +1,5 @@
+using Assets.MessageSystem;
+
 using TMPro;
 
 using UnityEngine;
@@ -53,10 +55,12 @@ public class BuyTerrainManager : MonoBehaviour
     private void ShowUI()
     {
 		buyTerrainUI.SetActive(true);
+		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowOpened));
 	}
 
 	private void HideUI()
 	{
 		buyTerrainUI.SetActive(false);
+		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowClosed));
 	}
 }

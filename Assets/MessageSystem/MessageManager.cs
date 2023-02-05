@@ -27,4 +27,9 @@ public class MessageManager : MonoBehaviour
 	{
 		Subscribers.Add(subscriber);
 	}
+
+	internal void Unsubscribe(IMessageSubscriber subscriber)
+	{
+		Subscribers.Remove(subscriber);
+	}
 }

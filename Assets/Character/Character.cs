@@ -1,11 +1,12 @@
 using Assets;
+using Assets.MessageSystem;
 
 using TMPro;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IMessageSubscriber
 {
 	public static Character Instance;
 
@@ -16,18 +17,31 @@ public class Character : MonoBehaviour
 	private Rigidbody2D characterRigidBody;
 	private Animator animator;
 
+	private bool paused = false;
+
 	private void Awake()
 	{
 		Instance = this;
+		
 		characterRigidBody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 
 		SetMoneyAmount();
 	}
 
+	private void OnEnable()
+	{
+		MessageManager.Instance.Subscribe(this);
+	}
+
+	private void OnDisable()
+	{
+		MessageManager.Instance.Unsubscribe(this);
+	}
+
 	private void OnMovement(InputValue value)
 	{
-		movement = value.Get<Vector2>();
+		movement = paused ? new Vector2() : value.Get<Vector2>();
 
 		if (movement.magnitude > 0)
 		{
@@ -68,5 +82,18 @@ public class Character : MonoBehaviour
 	private void SetMoneyAmount()
 	{
 		moneyAmountUI.text = MoneyAmount.ToString();
+	}
+
+	public void MessageReceived(Message message)
+	{
+		switch (message.type)
+		{
+			case MessageType.UIWindowOpened:
+				paused = true;
+				break;
+			case MessageType.UIWindowClosed:
+				paused = false;
+				break;
+		}
 	}
 }
