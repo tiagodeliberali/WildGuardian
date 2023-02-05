@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 
-using TMPro;
+using Assets.MessageSystem;
 
-using Unity.VisualScripting;
+using TMPro;
 
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    public static InventoryManager Instance;
+	public static InventoryManager Instance;
 	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
 
 	// Used to instantiate items UI on the inventory
@@ -22,6 +22,18 @@ public class InventoryManager : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
+	}
+
+	public void OpenWindow()
+	{
+		gameObject.SetActive(true);
+		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowOpened));
+	}
+
+	public void CloseWindow()
+	{
+		gameObject.SetActive(false);
+		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowClosed));
 	}
 
 	public void Add(Item item)
