@@ -6,14 +6,7 @@ using UnityEngine;
 
 public class MessageManager : MonoBehaviour
 {
-    public static MessageManager Instance;
-
-	public List<IMessageSubscriber> Subscribers = new List<IMessageSubscriber>();
-
-	private void Awake()
-	{
-		Instance = this;
-	}
+    public List<IMessageSubscriber> Subscribers = new List<IMessageSubscriber>();
 
 	public void AlertSubscribers(Message message)
 	{

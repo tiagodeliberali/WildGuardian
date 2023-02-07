@@ -13,6 +13,8 @@ public class Character : MonoBehaviour, IMessageSubscriber
 	public int MoneyAmount = 300;
 	public TextMeshProUGUI moneyAmountUI;
 
+	public MessageManager messageManager;
+
 	private Vector2 movement;
 	private Rigidbody2D characterRigidBody;
 	private Animator animator;
@@ -31,12 +33,12 @@ public class Character : MonoBehaviour, IMessageSubscriber
 
 	private void OnEnable()
 	{
-		MessageManager.Instance.Subscribe(this);
+		messageManager.Subscribe(this);
 	}
 
 	private void OnDisable()
 	{
-		MessageManager.Instance.Unsubscribe(this);
+		messageManager.Unsubscribe(this);
 	}
 
 	private void OnMovement(InputValue value)

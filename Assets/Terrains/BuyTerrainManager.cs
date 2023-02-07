@@ -8,6 +8,8 @@ public class BuyTerrainManager : MonoBehaviour
 {
     public GameObject buyTerrainUI;
 
+	public MessageManager messageManager;
+
 	private TextMeshProUGUI buyTerrainAmount;
 	private Transform okButton;
 	private Transform notEnoughMoneyUI;
@@ -55,12 +57,12 @@ public class BuyTerrainManager : MonoBehaviour
     private void ShowUI()
     {
 		buyTerrainUI.SetActive(true);
-		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowOpened));
+		messageManager.AlertSubscribers(new Message(MessageType.UIWindowOpened));
 	}
 
 	private void HideUI()
 	{
 		buyTerrainUI.SetActive(false);
-		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowClosed));
+		messageManager.AlertSubscribers(new Message(MessageType.UIWindowClosed));
 	}
 }

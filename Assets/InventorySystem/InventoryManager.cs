@@ -12,6 +12,8 @@ public class InventoryManager : MonoBehaviour
 	public static InventoryManager Instance;
 	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
 
+	public MessageManager messageManager;
+
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
 	public GameObject InventoryItem;
@@ -28,13 +30,13 @@ public class InventoryManager : MonoBehaviour
 	public void OpenWindow()
 	{
 		Inventory.SetActive(true);
-		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowOpened));
+		messageManager.AlertSubscribers(new Message(MessageType.UIWindowOpened));
 	}
 
 	public void CloseWindow()
 	{
 		Inventory.SetActive(false);
-		MessageManager.Instance.AlertSubscribers(new Message(MessageType.UIWindowClosed));
+		messageManager.AlertSubscribers(new Message(MessageType.UIWindowClosed));
 	}
 
 	public void Add(Item item)
