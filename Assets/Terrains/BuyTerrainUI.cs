@@ -4,7 +4,7 @@ using TMPro;
 
 using UnityEngine;
 
-public class BuyTerrainManager : MonoBehaviour
+public class BuyTerrainUI : MonoBehaviour
 {
     public GameObject buyTerrainUI;
 
@@ -17,13 +17,9 @@ public class BuyTerrainManager : MonoBehaviour
 
 	private TerrainController terrain;
 
-    public static BuyTerrainManager Instance;
-
-	private void Awake()
+    private void Awake()
 	{
-        Instance = this;
-
-		okButton = buyTerrainUI.transform.Find("OkButton");
+        okButton = buyTerrainUI.transform.Find("OkButton");
 		notEnoughMoneyUI = buyTerrainUI.transform.Find("NotEnoughMoney");
 		buyTerrainAmount = buyTerrainUI.transform.Find("Amount").GetComponent<TextMeshProUGUI>();
 	}

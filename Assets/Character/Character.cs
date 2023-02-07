@@ -62,7 +62,7 @@ public class Character : MonoBehaviour, IMessageSubscriber
 
 	public bool CanSpendMoney(int amount)
 	{
-		return amount < MoneyAmount;
+		return amount <= MoneyAmount;
 	}
 
 	public bool SpendMoney(int amount)

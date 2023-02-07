@@ -4,15 +4,15 @@ public class TerrainController : MonoBehaviour
 {
     public int Amount = 200;
 
-    public GameObject parent;
+    public BuyTerrainUI buyTerrainUI;
 
 	public void Buy()
     {
-        Destroy(parent);
+        Destroy(gameObject);
     }
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		BuyTerrainManager.Instance.Associate(this);
+		buyTerrainUI.Associate(this);
 	}
 }
