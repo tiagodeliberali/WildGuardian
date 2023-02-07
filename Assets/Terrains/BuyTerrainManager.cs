@@ -9,6 +9,7 @@ public class BuyTerrainManager : MonoBehaviour
     public GameObject buyTerrainUI;
 
 	public MessageManager messageManager;
+	public Character character;
 
 	private TextMeshProUGUI buyTerrainAmount;
 	private Transform okButton;
@@ -32,7 +33,7 @@ public class BuyTerrainManager : MonoBehaviour
         this.terrain = terrain;
 		buyTerrainAmount.text = terrain.Amount.ToString();
 
-		bool canBuyTerrain = Character.Instance.CanSpendMoney(terrain.Amount);
+		bool canBuyTerrain = character.CanSpendMoney(terrain.Amount);
 		okButton.gameObject.SetActive(canBuyTerrain);
 		notEnoughMoneyUI.gameObject.SetActive(!canBuyTerrain);
 
@@ -46,7 +47,7 @@ public class BuyTerrainManager : MonoBehaviour
 
     public void Buy()
     {
-		Character.Instance.SpendMoney(terrain.Amount);
+		character.SpendMoney(terrain.Amount);
 
 		terrain?.Buy();
         terrain = null;

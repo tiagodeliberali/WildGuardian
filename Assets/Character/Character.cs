@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 
 public class Character : MonoBehaviour, IMessageSubscriber
 {
-	public static Character Instance;
-
 	public int MoneyAmount = 300;
 	public TextMeshProUGUI moneyAmountUI;
 
@@ -23,8 +21,6 @@ public class Character : MonoBehaviour, IMessageSubscriber
 
 	private void Awake()
 	{
-		Instance = this;
-		
 		characterRigidBody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 

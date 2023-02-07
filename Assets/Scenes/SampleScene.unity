@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buyTerrainUI: {fileID: 1019500085}
   messageManager: {fileID: 2087356960}
+  character: {fileID: 1759251659}
 --- !u!4 &65757157
 Transform:
   m_ObjectHideFlags: 0
@@ -12593,6 +12594,17 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1759251659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2495460132188998, guid: 5c3a40840ad03df4da3c0d2b7f01fe92, type: 3}
+  m_PrefabInstance: {fileID: 2495461346409627}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f628537c057f662478d5d4e111531d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1763201119
 GameObject:
   m_ObjectHideFlags: 0
