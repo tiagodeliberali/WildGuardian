@@ -7,9 +7,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Zenject;
+
 public class InventoryManager : MonoBehaviour
 {
-	public static InventoryManager Instance;
 	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
 
 	public MessageManager messageManager;
@@ -22,9 +23,12 @@ public class InventoryManager : MonoBehaviour
 	public GameObject Inventory;
 	public Toggle EnableRemove;
 
-	private void Awake()
+	private InventoryManager inventoryManager;
+
+	[Inject]
+	public void Contruct(InventoryManager inventoryManager)
 	{
-		Instance = this;
+		this.inventoryManager = inventoryManager;
 	}
 
 	public void OpenWindow()
@@ -50,7 +54,7 @@ public class InventoryManager : MonoBehaviour
 		itemName.text = item.itemName;
 
 		var controller = obj.GetComponent<InvetoryItemController>();
-		controller.AssociateItem(item);
+		controller.AssociateItem(item, inventoryManager);
 		controller.SetRemoveButtonActive(EnableRemove.isOn);
 
 		InventoryItems.Add(controller);

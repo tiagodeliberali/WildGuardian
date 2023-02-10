@@ -4,12 +4,13 @@ using UnityEngine.UI;
 public class InvetoryItemController : MonoBehaviour
 {
     private Item item;
-    private Button button;
+	private InventoryManager inventoryManager;
+	private Button button;
     public Button RemoveButton;
 
 	public void RemoveItem()
     {
-        InventoryManager.Instance.Remove(this);
+		inventoryManager.Remove(this);
 		Destroy(gameObject);
     }
 
@@ -19,9 +20,11 @@ public class InvetoryItemController : MonoBehaviour
         RemoveItem();
 	}
 
-	public void AssociateItem(Item item)
+	public void AssociateItem(Item item, InventoryManager inventoryManager)
     {
         this.item = item;
+		this.inventoryManager = inventoryManager;
+		
 		button = gameObject.GetComponent<Button>();
 	}
 
