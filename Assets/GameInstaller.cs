@@ -7,7 +7,7 @@ public class GameInstaller : MonoInstaller
 	public InventoryManager inventoryManager;
 
 	public override void InstallBindings()
-    {
+	{
 		SignalBusInstaller.Install(Container);
 
 		Container.Bind<InventoryManager>()

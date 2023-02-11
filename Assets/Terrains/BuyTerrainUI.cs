@@ -8,7 +8,7 @@ using Zenject;
 
 public class BuyTerrainUI : MonoBehaviour
 {
-    public GameObject buyTerrainUI;
+	public GameObject buyTerrainUI;
 
 	public SignalBus signalBus;
 	public Character character;
@@ -26,16 +26,16 @@ public class BuyTerrainUI : MonoBehaviour
 		this.signalBus = signalBus;
 	}
 
-private void Awake()
+	private void Awake()
 	{
-        okButton = buyTerrainUI.transform.Find("OkButton");
+		okButton = buyTerrainUI.transform.Find("OkButton");
 		notEnoughMoneyUI = buyTerrainUI.transform.Find("NotEnoughMoney");
 		buyTerrainAmount = buyTerrainUI.transform.Find("Amount").GetComponent<TextMeshProUGUI>();
 	}
 
 	public void Associate(TerrainController terrain)
-    { 
-        this.terrain = terrain;
+	{
+		this.terrain = terrain;
 		buyTerrainAmount.text = terrain.Amount.ToString();
 
 		bool canBuyTerrain = character.CanSpendMoney(terrain.Amount);
@@ -45,23 +45,23 @@ private void Awake()
 		ShowUI();
 	}
 
-    public void Close()
-    {
+	public void Close()
+	{
 		HideUI();
 	}
 
-    public void Buy()
-    {
+	public void Buy()
+	{
 		character.SpendMoney(terrain.Amount);
 
 		terrain?.Buy();
-        terrain = null;
+		terrain = null;
 
 		HideUI();
 	}
 
-    private void ShowUI()
-    {
+	private void ShowUI()
+	{
 		buyTerrainUI.SetActive(true);
 		signalBus.Fire(UISignal.Opened());
 	}

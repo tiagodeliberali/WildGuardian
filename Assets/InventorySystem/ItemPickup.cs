@@ -4,7 +4,7 @@ using Zenject;
 
 public class ItemPickup : MonoBehaviour
 {
-    public Item Item;
+	public Item Item;
 	private InventoryManager inventoryManager;
 
 	[Inject]

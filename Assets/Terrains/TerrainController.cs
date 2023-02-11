@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class TerrainController : MonoBehaviour
 {
-    public int Amount = 200;
+	public int Amount = 200;
 
-    public BuyTerrainUI buyTerrainUI;
+	public BuyTerrainUI buyTerrainUI;
 
 	public void Buy()
-    {
-        Destroy(gameObject);
-    }
+	{
+		Destroy(gameObject);
+	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
