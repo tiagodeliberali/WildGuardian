@@ -1,23 +1,32 @@
 using Assets;
-using Assets.MessageSystem;
+using Assets.Signals;
 
 using TMPro;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Character : MonoBehaviour, IMessageSubscriber
+using Zenject;
+
+public class Character : MonoBehaviour
 {
 	public int MoneyAmount = 300;
 	public TextMeshProUGUI moneyAmountUI;
 
-	public MessageManager messageManager;
+	private SignalBus signalBus;
 
 	private Vector2 movement;
 	private Rigidbody2D characterRigidBody;
 	private Animator animator;
 
 	private bool paused = false;
+
+
+	[Inject]
+	public void Contruct(SignalBus signalBus)
+	{
+		this.signalBus = signalBus;
+	}
 
 	private void Awake()
 	{
@@ -29,12 +38,17 @@ public class Character : MonoBehaviour, IMessageSubscriber
 
 	private void OnEnable()
 	{
-		messageManager.Subscribe(this);
+		signalBus.Subscribe<UISignal>(this.OnUIStateChange);
+	}
+
+	private void OnUIStateChange(UISignal signal)
+	{
+		paused = signal.IsOpen;
 	}
 
 	private void OnDisable()
 	{
-		messageManager.Unsubscribe(this);
+		signalBus.Unsubscribe<UISignal>(this.OnUIStateChange);
 	}
 
 	private void OnMovement(InputValue value)
@@ -80,18 +94,5 @@ public class Character : MonoBehaviour, IMessageSubscriber
 	private void SetMoneyAmount()
 	{
 		moneyAmountUI.text = MoneyAmount.ToString();
-	}
-
-	public void MessageReceived(Message message)
-	{
-		switch (message.type)
-		{
-			case MessageType.UIWindowOpened:
-				paused = true;
-				break;
-			case MessageType.UIWindowClosed:
-				paused = false;
-				break;
-		}
 	}
 }

@@ -1,14 +1,16 @@
-using Assets.MessageSystem;
+using Assets.Signals;
 
 using TMPro;
 
 using UnityEngine;
 
+using Zenject;
+
 public class BuyTerrainUI : MonoBehaviour
 {
     public GameObject buyTerrainUI;
 
-	public MessageManager messageManager;
+	public SignalBus signalBus;
 	public Character character;
 
 	private TextMeshProUGUI buyTerrainAmount;
@@ -17,7 +19,14 @@ public class BuyTerrainUI : MonoBehaviour
 
 	private TerrainController terrain;
 
-    private void Awake()
+
+	[Inject]
+	public void Contruct(SignalBus signalBus)
+	{
+		this.signalBus = signalBus;
+	}
+
+private void Awake()
 	{
         okButton = buyTerrainUI.transform.Find("OkButton");
 		notEnoughMoneyUI = buyTerrainUI.transform.Find("NotEnoughMoney");
@@ -54,12 +63,12 @@ public class BuyTerrainUI : MonoBehaviour
     private void ShowUI()
     {
 		buyTerrainUI.SetActive(true);
-		messageManager.AlertSubscribers(new Message(MessageType.UIWindowOpened));
+		signalBus.Fire(UISignal.Opened());
 	}
 
 	private void HideUI()
 	{
 		buyTerrainUI.SetActive(false);
-		messageManager.AlertSubscribers(new Message(MessageType.UIWindowClosed));
+		signalBus.Fire(UISignal.Closed());
 	}
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using Assets.MessageSystem;
+using Assets.Signals;
 
 using TMPro;
 
@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
 {
 	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
 
-	public MessageManager messageManager;
+	public SignalBus messageManager;
 
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
@@ -26,21 +26,22 @@ public class InventoryManager : MonoBehaviour
 	private InventoryManager inventoryManager;
 
 	[Inject]
-	public void Contruct(InventoryManager inventoryManager)
+	public void Contruct(InventoryManager inventoryManager, SignalBus messageManager)
 	{
 		this.inventoryManager = inventoryManager;
+		this.messageManager = messageManager;
 	}
 
 	public void OpenWindow()
 	{
 		Inventory.SetActive(true);
-		messageManager.AlertSubscribers(new Message(MessageType.UIWindowOpened));
+		messageManager.Fire(UISignal.Opened());
 	}
 
 	public void CloseWindow()
 	{
 		Inventory.SetActive(false);
-		messageManager.AlertSubscribers(new Message(MessageType.UIWindowClosed));
+		messageManager.Fire(UISignal.Closed());
 	}
 
 	public void Add(Item item)
