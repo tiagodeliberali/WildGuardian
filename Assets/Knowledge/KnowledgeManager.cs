@@ -67,6 +67,10 @@ public class KnowledgeManager : MonoBehaviour
 			items.Add(item.name, item);
 
 			GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
+
+			var itemName = obj.transform.Find("Icon").GetComponent<Image>();
+			itemName.sprite = item.icon;
+
 			var controller = obj.GetComponent<KnowledgeItemController>();
 			controller.AssociateItem(item, this);
 		}
