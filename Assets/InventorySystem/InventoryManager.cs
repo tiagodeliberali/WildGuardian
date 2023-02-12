@@ -13,7 +13,8 @@ public class InventoryManager : MonoBehaviour
 {
 	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
 
-	public SignalBus signalBus;
+	private SignalBus signalBus;
+	private KnowledgeManager knowledgeManager;
 
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
@@ -24,9 +25,10 @@ public class InventoryManager : MonoBehaviour
 	public Toggle EnableRemove;
 
 	[Inject]
-	public void Contruct(SignalBus signalBus)
+	public void Contruct(SignalBus signalBus, KnowledgeManager knowledgeManager)
 	{
 		this.signalBus = signalBus;
+		this.knowledgeManager = knowledgeManager;
 	}
 
 	public void OpenWindow()
@@ -56,6 +58,7 @@ public class InventoryManager : MonoBehaviour
 		controller.SetRemoveButtonActive(EnableRemove.isOn);
 
 		InventoryItems.Add(controller);
+		knowledgeManager.CollectItem(item);
 	}
 
 	public void Remove(InvetoryItemController item)
