@@ -16,3 +16,12 @@ MonoBehaviour:
   itemName: Colorido
   type: 0
   icon: {fileID: 991795241, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}
+  description: "Um dragonete todo colorido que \xE9 capaz de produzir arco \xEDris!"
+  incubator: Simples
+  eggValue: 25
+  puppyValue: 70
+  drop: "Pedra arco-\xEDris"
+  dropValue: 30
+  timeToHatch: 5
+  timeToGrow: 13
+  food: Milho

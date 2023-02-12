@@ -16,3 +16,13 @@ MonoBehaviour:
   itemName: Torta
   type: 0
   icon: {fileID: -694303968, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}
+  description: "Um \xF3timo ajudante na cozinha. Muito habilidoso, pode ajudar a
+    fazer bolos"
+  incubator: Simples
+  eggValue: 80
+  puppyValue: 400
+  drop: Casca para bolo
+  dropValue: 200
+  timeToHatch: 7
+  timeToGrow: 31
+  food: Bolo

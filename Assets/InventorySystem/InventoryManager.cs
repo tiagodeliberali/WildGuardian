@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
 {
 	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
 
-	public SignalBus messageManager;
+	public SignalBus signalBus;
 
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
@@ -23,25 +23,22 @@ public class InventoryManager : MonoBehaviour
 	public GameObject Inventory;
 	public Toggle EnableRemove;
 
-	private InventoryManager inventoryManager;
-
 	[Inject]
-	public void Contruct(InventoryManager inventoryManager, SignalBus messageManager)
+	public void Contruct(SignalBus signalBus)
 	{
-		this.inventoryManager = inventoryManager;
-		this.messageManager = messageManager;
+		this.signalBus = signalBus;
 	}
 
 	public void OpenWindow()
 	{
 		Inventory.SetActive(true);
-		messageManager.Fire(UISignal.Opened());
+		signalBus.Fire(UISignal.Opened());
 	}
 
 	public void CloseWindow()
 	{
 		Inventory.SetActive(false);
-		messageManager.Fire(UISignal.Closed());
+		signalBus.Fire(UISignal.Closed());
 	}
 
 	public void Add(Item item)
@@ -55,7 +52,7 @@ public class InventoryManager : MonoBehaviour
 		itemName.text = item.itemName;
 
 		var controller = obj.GetComponent<InvetoryItemController>();
-		controller.AssociateItem(item, inventoryManager);
+		controller.AssociateItem(item, this);
 		controller.SetRemoveButtonActive(EnableRemove.isOn);
 
 		InventoryItems.Add(controller);

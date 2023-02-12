@@ -16,3 +16,13 @@ MonoBehaviour:
   itemName: Fogo
   type: 0
   icon: {fileID: 985908904, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}
+  description: "Um dragonete que adora fogo e calor. Vive pr\xF3ximo a vulc\xF5es
+    e cospe fogo"
+  incubator: Fogo
+  eggValue: 100
+  puppyValue: 300
+  drop: Escama de fogo
+  dropValue: 250
+  timeToHatch: 10
+  timeToGrow: 25
+  food: Magma
