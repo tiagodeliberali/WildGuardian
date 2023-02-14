@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 
+using Assets.Items;
 using Assets.Signals;
 
 using TMPro;
@@ -9,12 +11,11 @@ using UnityEngine.UI;
 
 using Zenject;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryUI : MonoBehaviour
 {
-	public List<InvetoryItemController> InventoryItems = new List<InvetoryItemController>();
+	public Dictionary<Guid, InvetoryItemUI> InventoryItems = new Dictionary<Guid, InvetoryItemUI>();
 
 	private SignalBus signalBus;
-	private KnowledgeManager knowledgeManager;
 
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
@@ -25,10 +26,29 @@ public class InventoryManager : MonoBehaviour
 	public Toggle EnableRemove;
 
 	[Inject]
-	public void Contruct(SignalBus signalBus, KnowledgeManager knowledgeManager)
+	public void Contruct(SignalBus signalBus)
 	{
 		this.signalBus = signalBus;
-		this.knowledgeManager = knowledgeManager;
+	}
+
+	private void Awake()
+	{
+		signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
+	}
+
+	private void OnItemActionHappened(ItemActionSignal itemAction)
+	{
+		switch (itemAction.Action)
+		{
+			case ItemAction.Pickup:
+				Add(itemAction.Item);
+				break;
+			case ItemAction.Sell:
+			case ItemAction.Drop:
+			case ItemAction.Use:
+				InventoryItems.Remove(itemAction.Item.Id);
+				break;
+		}
 	}
 
 	public void OpenWindow()
@@ -43,34 +63,28 @@ public class InventoryManager : MonoBehaviour
 		signalBus.Fire(UISignal.Closed());
 	}
 
-	public void Add(Item item)
+	private void Add(ItemInstance instance)
 	{
 		GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
 
 		var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-		itemIcon.sprite = item.icon;
+		itemIcon.sprite = instance.Definition.icon;
 
 		var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-		itemName.text = item.itemName;
+		itemName.text = instance.Definition.itemName;
 
-		var controller = obj.GetComponent<InvetoryItemController>();
-		controller.AssociateItem(item, this);
+		var controller = obj.GetComponent<InvetoryItemUI>();
+		controller.AssociateItem(instance);
 		controller.SetRemoveButtonActive(EnableRemove.isOn);
 
-		InventoryItems.Add(controller);
-		knowledgeManager.CollectItem(item);
-	}
-
-	public void Remove(InvetoryItemController item)
-	{
-		InventoryItems.Remove(item);
+		InventoryItems.Add(instance.Id, controller);
 	}
 
 	public void EnableItemsRemove()
 	{
 		foreach (var item in InventoryItems)
 		{
-			item.SetRemoveButtonActive(EnableRemove.isOn);
+			item.Value.SetRemoveButtonActive(EnableRemove.isOn);
 		}
 	}
 
@@ -78,7 +92,7 @@ public class InventoryManager : MonoBehaviour
 	{
 		foreach (var item in InventoryItems)
 		{
-			item.EnableButtonIfType(type);
+			item.Value.EnableInteractonIfType(type);
 		}
 	}
 }

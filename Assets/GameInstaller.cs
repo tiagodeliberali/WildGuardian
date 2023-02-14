@@ -1,10 +1,11 @@
+using Assets.Character;
 using Assets.Signals;
 
 using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
-	public InventoryManager inventoryManager;
+	public InventoryUI inventoryManager;
 	
 	public KnowledgeManager knowledgeManager;
 
@@ -12,12 +13,17 @@ public class GameInstaller : MonoInstaller
 	{
 		SignalBusInstaller.Install(Container);
 
-		Container.Bind<InventoryManager>()
+		Container.Bind<CharacterData>()
+			.FromNew()
+			.AsSingle();
+
+		Container.Bind<InventoryUI>()
 			.FromInstance(inventoryManager);
 
 		Container.Bind<KnowledgeManager>()
 			.FromInstance(knowledgeManager);
 
 		Container.DeclareSignal<UISignal>();
+		Container.DeclareSignal<ItemActionSignal>();
 	}
 }

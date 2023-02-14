@@ -1,3 +1,4 @@
+using Assets.Character;
 using Assets.Signals;
 
 using TMPro;
@@ -11,7 +12,7 @@ public class BuyTerrainUI : MonoBehaviour
 	public GameObject buyTerrainUI;
 
 	public SignalBus signalBus;
-	public Character character;
+	public CharacterData character;
 
 	private TextMeshProUGUI buyTerrainAmount;
 	private Transform okButton;
@@ -21,9 +22,10 @@ public class BuyTerrainUI : MonoBehaviour
 
 
 	[Inject]
-	public void Contruct(SignalBus signalBus)
+	public void Contruct(SignalBus signalBus, CharacterData character)
 	{
 		this.signalBus = signalBus;
+		this.character = character;
 	}
 
 	private void Awake()

@@ -1,7 +1,5 @@
 using UnityEngine;
 
-using Zenject;
-
 public class KnowledgeItemController : MonoBehaviour
 {
     private Item item;

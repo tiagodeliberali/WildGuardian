@@ -41,7 +41,7 @@ public class KnowledgeManager : MonoBehaviour
 	public GameObject InventoryItem;
 
 	[Inject]
-	public void Contruct(InventoryManager inventoryManager, SignalBus signalBus)
+	public void Contruct(InventoryUI inventoryManager, SignalBus signalBus)
 	{
 		this.signalBus = signalBus;
 	}
