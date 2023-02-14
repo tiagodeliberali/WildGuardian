@@ -613,7 +613,6 @@ GameObject:
   - component: {fileID: 1383627877}
   - component: {fileID: 1383627876}
   - component: {fileID: 1383627875}
-  - component: {fileID: 2666460163007780141}
   m_Layer: 5
   m_Name: Knowledge
   m_TagString: Untagged
@@ -712,35 +711,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2666460163007780141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1383627873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cc4f3d78b62a041b7aa6d1de856f26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knowledge: {fileID: 1383627873}
-  details: {fileID: 3291767661735889822}
-  listOfItems: {fileID: 418205724}
-  icon: {fileID: 1631366670}
-  itemName: {fileID: 1218901110}
-  description: {fileID: 610447728}
-  incubator: {fileID: 3046575809629495140}
-  eggValue: {fileID: 2552682720225199926}
-  puppyValue: {fileID: 2552682719686114250}
-  drop: {fileID: 2552682720235400120}
-  dropValue: {fileID: 2552682720013620890}
-  timeToHatch: {fileID: 2552682719803802271}
-  timeToGrow: {fileID: 2552682721082515212}
-  food: {fileID: 2552682720287396426}
-  count: {fileID: 2552682720366176260}
-  ItemPlaceholder: {fileID: 418205724}
-  InventoryItem: {fileID: 3124193658944568725, guid: 74266cc81cc337d419cc16ec6b85ec16, type: 3}
 --- !u!1 &1631366668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,8 +1039,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2666460163007780141}
-        m_TargetAssemblyTypeName: KnowledgeManager, Assembly-CSharp
+      - m_Target: {fileID: 5632907653998063109}
+        m_TargetAssemblyTypeName: KnowledgeUI, Assembly-CSharp
         m_MethodName: CloseWindow
         m_Mode: 1
         m_Arguments:
@@ -1899,6 +1869,7 @@ GameObject:
   - component: {fileID: 8020864549575981746}
   - component: {fileID: 8020864549575981747}
   - component: {fileID: 4177040697758767522}
+  - component: {fileID: 5632907653998063109}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2008,6 +1979,34 @@ MonoBehaviour:
   InventoryItem: {fileID: 5185858648756007468, guid: 28d25986aec8e7d4587c0708a6e9f181, type: 3}
   Inventory: {fileID: 8020864549982494689}
   EnableRemove: {fileID: 8020864549999012647}
+--- !u!114 &5632907653998063109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8020864549575981744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7cc4f3d78b62a041b7aa6d1de856f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knowledge: {fileID: 1383627873}
+  details: {fileID: 3291767661735889822}
+  icon: {fileID: 1631366670}
+  itemName: {fileID: 1218901110}
+  description: {fileID: 610447728}
+  incubator: {fileID: 3046575809629495140}
+  eggValue: {fileID: 2552682720225199926}
+  puppyValue: {fileID: 2552682719686114250}
+  drop: {fileID: 2552682720235400120}
+  dropValue: {fileID: 2552682720013620890}
+  timeToHatch: {fileID: 2552682719803802271}
+  timeToGrow: {fileID: 2552682721082515212}
+  food: {fileID: 2552682720287396426}
+  count: {fileID: 2552682720366176260}
+  ItemPlaceholder: {fileID: 418205724}
+  InventoryItem: {fileID: 3124193658944568725, guid: 74266cc81cc337d419cc16ec6b85ec16, type: 3}
 --- !u!1 &8020864549702666811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,8 +2548,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2666460163007780141}
-        m_TargetAssemblyTypeName: KnowledgeManager, Assembly-CSharp
+      - m_Target: {fileID: 5632907653998063109}
+        m_TargetAssemblyTypeName: KnowledgeUI, Assembly-CSharp
         m_MethodName: OpenWindow
         m_Mode: 1
         m_Arguments:

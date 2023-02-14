@@ -35,7 +35,7 @@ public class BuyTerrainUI : MonoBehaviour
 		buyTerrainAmount = buyTerrainUI.transform.Find("Amount").GetComponent<TextMeshProUGUI>();
 	}
 
-	public void Associate(TerrainController terrain)
+	public void Select(TerrainController terrain)
 	{
 		this.terrain = terrain;
 		buyTerrainAmount.text = terrain.Amount.ToString();

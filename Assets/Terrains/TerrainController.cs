@@ -13,6 +13,6 @@ public class TerrainController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		buyTerrainUI.Associate(this);
+		buyTerrainUI.Select(this);
 	}
 }

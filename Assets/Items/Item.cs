@@ -17,7 +17,6 @@ public class Item : ScriptableObject
 	public int timeToHatch;
 	public int timeToGrow;
 	public string food;
-	public int count = 0;
 }
 
 public enum ItemType

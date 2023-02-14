@@ -7,7 +7,7 @@ public class GameInstaller : MonoInstaller
 {
 	public InventoryUI inventoryManager;
 	
-	public KnowledgeManager knowledgeManager;
+	public KnowledgeUI knowledgeManager;
 
 	public override void InstallBindings()
 	{
@@ -20,7 +20,7 @@ public class GameInstaller : MonoInstaller
 		Container.Bind<InventoryUI>()
 			.FromInstance(inventoryManager);
 
-		Container.Bind<KnowledgeManager>()
+		Container.Bind<KnowledgeUI>()
 			.FromInstance(knowledgeManager);
 
 		Container.DeclareSignal<UISignal>();

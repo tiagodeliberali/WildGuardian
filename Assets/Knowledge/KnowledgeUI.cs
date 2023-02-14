@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using Assets.Knowledge;
 using Assets.Signals;
 
 using TMPro;
@@ -9,13 +10,11 @@ using UnityEngine.UI;
 
 using Zenject;
 
-public class KnowledgeManager : MonoBehaviour
+public class KnowledgeUI : MonoBehaviour
 {
 	public SignalBus signalBus;
 	public GameObject knowledge;
 	public GameObject details;
-
-	public Transform listOfItems;
 
 	public Image icon;
 
@@ -34,16 +33,29 @@ public class KnowledgeManager : MonoBehaviour
 	public TextMeshProUGUI food;
 	public TextMeshProUGUI count;
 
-	private Dictionary<string, Item> items = new Dictionary<string, Item>();
+	private Dictionary<string, KnowledgeItemInstance> items = new Dictionary<string, KnowledgeItemInstance>();
 
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
 	public GameObject InventoryItem;
 
 	[Inject]
-	public void Contruct(InventoryUI inventoryManager, SignalBus signalBus)
+	public void Contruct(SignalBus signalBus)
 	{
 		this.signalBus = signalBus;
+	}
+
+	private void Awake()
+	{
+		signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
+	}
+
+	private void OnItemActionHappened(ItemActionSignal itemAction)
+	{
+		if (itemAction.Action.Equals(ItemAction.Pickup))
+		{
+			CollectItem(itemAction.Item.Definition);
+		}
 	}
 
 	public void OpenWindow()
@@ -64,40 +76,41 @@ public class KnowledgeManager : MonoBehaviour
 	{
 		if (!items.ContainsKey(item.name))
 		{
-			items.Add(item.name, item);
+			items.Add(item.name, new KnowledgeItemInstance(item));
 
 			GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
 
 			var itemName = obj.transform.Find("Icon").GetComponent<Image>();
 			itemName.sprite = item.icon;
 
-			var controller = obj.GetComponent<KnowledgeItemController>();
-			controller.AssociateItem(item, this);
+			var controller = obj.GetComponent<KnowledgeItemUI>();
+			controller.AssociateItem(item.name, this);
 		}
 
-		items[item.name].count++;
+		items[item.name].Add();
 	}
 
-	public void AssociateItem(Item item)
+	public void SelectItem(string name)
 	{
-		var knowItem = items[item.name];
+		var instance = items[name];
+		var definition = instance.Definition;
 
-		icon.sprite = knowItem.icon;
+		icon.sprite = definition.icon;
 
-		itemName.text = knowItem.itemName;
-		description.text = knowItem.description;
-		incubator.text = knowItem.incubator;
+		itemName.text = definition.itemName;
+		description.text = definition.description;
+		incubator.text = definition.incubator;
 
-		eggValue.text = $"$ {knowItem.eggValue}";
-		puppyValue.text = $"$ {knowItem.puppyValue}";
-		drop.text = knowItem.drop;
+		eggValue.text = $"$ {definition.eggValue}";
+		puppyValue.text = $"$ {definition.puppyValue}";
+		drop.text = definition.drop;
 
-		dropValue.text = $"$ {knowItem.dropValue}";
-		timeToHatch.text = $"{knowItem.timeToHatch} dias";
-		timeToGrow.text = $"{knowItem.timeToGrow} dias";
+		dropValue.text = $"$ {definition.dropValue}";
+		timeToHatch.text = $"{definition.timeToHatch} dias";
+		timeToGrow.text = $"{definition.timeToGrow} dias";
 
-		food.text = knowItem.food;
-		count.text = $"{knowItem.count}";
+		food.text = definition.food;
+		count.text = $"{instance.Count}";
 
 		details.SetActive(true);
 	}

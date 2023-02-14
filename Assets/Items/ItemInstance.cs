@@ -8,9 +8,9 @@ namespace Assets.Items
 		
 		public Item Definition { get; }
 
-		public ItemInstance(Guid guid, Item item) 
+		public ItemInstance(Item item) 
 		{
-			Id = guid;
+			Id = Guid.NewGuid();
 			Definition = item;
 		}		
 	}

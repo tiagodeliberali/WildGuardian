@@ -21,7 +21,7 @@ public class ItemPickup : MonoBehaviour
 
 	private void Awake()
 	{
-		instance = new ItemInstance(Guid.NewGuid(), Item);
+		instance = new ItemInstance(Item);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
