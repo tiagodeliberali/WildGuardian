@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 
+using Assets.Character;
 using Assets.Items;
 using Assets.Signals;
 
@@ -13,9 +13,10 @@ using Zenject;
 
 public class InventoryUI : MonoBehaviour
 {
-	public Dictionary<Guid, InvetoryItemUI> InventoryItems = new Dictionary<Guid, InvetoryItemUI>();
+	public List<InvetoryItemUI> InventoryItems = new List<InvetoryItemUI>();
 
 	private SignalBus signalBus;
+	private CharacterData character;
 
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
@@ -26,65 +27,61 @@ public class InventoryUI : MonoBehaviour
 	public Toggle EnableRemove;
 
 	[Inject]
-	public void Contruct(SignalBus signalBus)
+	public void Contruct(SignalBus signalBus, CharacterData character)
 	{
 		this.signalBus = signalBus;
-	}
-
-	private void Awake()
-	{
-		signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
-	}
-
-	private void OnItemActionHappened(ItemActionSignal itemAction)
-	{
-		switch (itemAction.Action)
-		{
-			case ItemAction.Pickup:
-				Add(itemAction.Item);
-				break;
-			case ItemAction.Sell:
-			case ItemAction.Drop:
-			case ItemAction.Use:
-				InventoryItems.Remove(itemAction.Item.Id);
-				break;
-		}
+		this.character = character;
 	}
 
 	public void OpenWindow()
 	{
 		Inventory.SetActive(true);
 		signalBus.Fire(UISignal.Opened());
+		LoadItems();
 	}
 
 	public void CloseWindow()
 	{
 		Inventory.SetActive(false);
 		signalBus.Fire(UISignal.Closed());
+		ClearItems();
 	}
 
-	private void Add(ItemInstance instance)
+	private void ClearItems()
 	{
-		GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
+		foreach (var item in InventoryItems)
+		{
+			item.RemoveItem();
+		}
 
-		var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-		itemIcon.sprite = instance.Definition.icon;
+		InventoryItems.Clear();
+	}
 
-		var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-		itemName.text = instance.Definition.itemName;
+	private void LoadItems()
+	{
+		foreach (var instance in character.inventory)
+		{
+			GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
 
-		var controller = obj.GetComponent<InvetoryItemUI>();
-		controller.AssociateItem(instance);
-		controller.SetRemoveButtonActive(EnableRemove.isOn);
+			var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+			itemIcon.sprite = instance.Definition.icon;
 
-		InventoryItems.Add(instance.Id, controller);
+			var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+			itemName.text = instance.Definition.itemName;
+
+			var controller = obj.GetComponent<InvetoryItemUI>();
+			controller.AssociateItem(instance);
+			controller.SetRemoveButtonActive(EnableRemove.isOn);
+
+			InventoryItems.Add(controller);
+		}	
 	}
 
 	public void EnableItemsRemove()
 	{
 		foreach (var item in InventoryItems)
 		{
-			item.Value.SetRemoveButtonActive(EnableRemove.isOn);
+			item.SetRemoveButtonActive(EnableRemove.isOn);
 		}
 	}
 
@@ -92,7 +89,7 @@ public class InventoryUI : MonoBehaviour
 	{
 		foreach (var item in InventoryItems)
 		{
-			item.Value.EnableInteractonIfType(type);
+			item.EnableInteractonIfType(type);
 		}
 	}
 }
