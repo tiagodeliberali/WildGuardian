@@ -1884,6 +1884,7 @@ GameObject:
   - component: {fileID: 8020864549575981747}
   - component: {fileID: 4177040697758767522}
   - component: {fileID: 5632907653998063109}
+  - component: {fileID: 4424796015657960494}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1989,6 +1990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a66246daebeb146b9288a654f05280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InventoryItems: []
   ItemPlaceholder: {fileID: 8020864550544249660}
   InventoryItem: {fileID: 5185858648756007468, guid: 28d25986aec8e7d4587c0708a6e9f181, type: 3}
   Inventory: {fileID: 8020864549982494689}
@@ -2006,6 +2008,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knowledge: {fileID: 1383627873}
+  knowledgeDetails: {fileID: 4424796015657960494}
+  ItemPlaceholder: {fileID: 418205724}
+  InventoryItem: {fileID: 3124193658944568725, guid: 74266cc81cc337d419cc16ec6b85ec16, type: 3}
+--- !u!114 &4424796015657960494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8020864549575981744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29df6138344980c47aede7cfc7a5cb2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   details: {fileID: 3291767661735889822}
   icon: {fileID: 1631366670}
   itemName: {fileID: 1218901110}
@@ -2019,8 +2036,6 @@ MonoBehaviour:
   timeToGrow: {fileID: 2552682721082515212}
   food: {fileID: 2552682720287396426}
   count: {fileID: 2552682720366176260}
-  ItemPlaceholder: {fileID: 418205724}
-  InventoryItem: {fileID: 3124193658944568725, guid: 74266cc81cc337d419cc16ec6b85ec16, type: 3}
 --- !u!1 &8020864549702666811
 GameObject:
   m_ObjectHideFlags: 0

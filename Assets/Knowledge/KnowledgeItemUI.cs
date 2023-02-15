@@ -5,17 +5,17 @@ using UnityEngine;
 public class KnowledgeItemUI : MonoBehaviour
 {
 	private KnowledgeItemInstance item;
-	private KnowledgeUI knowledgeManager;
+	private KnowledgeDetailsUI knowledgeDetails;
 
 	public void Click()
     {
-        knowledgeManager.SelectItem(item);
+        knowledgeDetails.SelectItem(item);
 	}
 
-	public void AssociateItem(KnowledgeItemInstance item, KnowledgeUI knowledgeManager)
+	public void AssociateItem(KnowledgeItemInstance item, KnowledgeDetailsUI knowledgeManager)
 	{
 		this.item = item;
-		this.knowledgeManager = knowledgeManager;
+		this.knowledgeDetails = knowledgeManager;
 	}
 
 	public void Remove()

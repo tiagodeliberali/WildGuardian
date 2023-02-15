@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 
 using Assets.Character;
-using Assets.Knowledge;
 using Assets.Signals;
-
-using TMPro;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,29 +11,11 @@ using Zenject;
 public class KnowledgeUI : MonoBehaviour
 {
 	public GameObject knowledge;
-	public GameObject details;
-
-	public Image icon;
-
-	public TextMeshProUGUI itemName;
-	public TextMeshProUGUI description;
-	public TextMeshProUGUI incubator;
-
-	public TextMeshProUGUI eggValue;
-	public TextMeshProUGUI puppyValue;
-	public TextMeshProUGUI drop;
-
-	public TextMeshProUGUI dropValue;
-	public TextMeshProUGUI timeToHatch;
-	public TextMeshProUGUI timeToGrow;
-
-	public TextMeshProUGUI food;
-	public TextMeshProUGUI count;
+	public KnowledgeDetailsUI knowledgeDetails;
 
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
 	public GameObject InventoryItem;
-
 
 	private SignalBus signalBus;
 	private CharacterData character;
@@ -58,7 +37,7 @@ public class KnowledgeUI : MonoBehaviour
 		}
 
 		knowledge.SetActive(true);
-		details.SetActive(false);
+		knowledgeDetails.SetActive(false);
 		
 		signalBus.Fire(UISignal.Opened());
 		LoadItems();
@@ -81,7 +60,7 @@ public class KnowledgeUI : MonoBehaviour
 			itemName.sprite = item.Definition.icon;
 
 			var controller = obj.GetComponent<KnowledgeItemUI>();
-			controller.AssociateItem(item, this);
+			controller.AssociateItem(item, knowledgeDetails);
 
 			knowledgeItems.Add(controller);
 		}
@@ -95,29 +74,5 @@ public class KnowledgeUI : MonoBehaviour
 		}
 
 		knowledgeItems.Clear();
-	}
-
-	public void SelectItem(KnowledgeItemInstance instance)
-	{
-		var definition = instance.Definition;
-
-		icon.sprite = definition.icon;
-
-		itemName.text = definition.itemName;
-		description.text = definition.description;
-		incubator.text = definition.incubator;
-
-		eggValue.text = $"$ {definition.eggValue}";
-		puppyValue.text = $"$ {definition.puppyValue}";
-		drop.text = definition.drop;
-
-		dropValue.text = $"$ {definition.dropValue}";
-		timeToHatch.text = $"{definition.timeToHatch} dias";
-		timeToGrow.text = $"{definition.timeToGrow} dias";
-
-		food.text = definition.food;
-		count.text = $"{instance.Count}";
-
-		details.SetActive(true);
 	}
 }
