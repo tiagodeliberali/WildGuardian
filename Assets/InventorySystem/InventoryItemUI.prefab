@@ -483,8 +483,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 826871785}
-        m_TargetAssemblyTypeName: InvetoryItemRemoveController, Assembly-CSharp
-        m_MethodName: RemoveItem
+        m_TargetAssemblyTypeName: InvetoryItemUI, Assembly-CSharp
+        m_MethodName: DropItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

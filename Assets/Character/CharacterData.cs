@@ -47,6 +47,20 @@ namespace Assets.Character
 						break;
 				}
 			}
+			else if (item.Action.Equals(ItemAction.Drop))
+			{
+				switch (item.Item.Definition.type)
+				{
+					case ItemType.Egg:
+						inventory.Remove(item.Item);
+						break;
+					case ItemType.Drop:
+						inventory.Remove(item.Item);
+						break;
+					case ItemType.Money:
+						break;
+				}
+			}
 		}
 
 		private void AddKnowledge(Item definition)

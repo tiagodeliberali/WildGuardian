@@ -57,7 +57,7 @@ public class InventoryUI : MonoBehaviour
 	{
 		foreach (var item in InventoryItems)
 		{
-			item.Remove();
+			if (item != null) item.Remove();
 		}
 
 		InventoryItems.Clear();
