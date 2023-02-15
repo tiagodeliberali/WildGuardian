@@ -2,11 +2,13 @@
 
 using ModestTree;
 
+using UnityEngine;
+
 using Zenject;
 
 namespace Assets.Character
 {
-	public class CharacterData : IInitializable
+	public class CharacterData
 	{
 		private SignalBus signalBus;
 
@@ -16,10 +18,6 @@ namespace Assets.Character
 		public void Contruct(SignalBus signalBus)
 		{
 			this.signalBus = signalBus;
-		}
-
-		public void Initialize()
-		{
 			signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
 		}
 
@@ -27,7 +25,7 @@ namespace Assets.Character
 		{
 			if (item.Action.Equals(ItemAction.Pickup))
 			{
-				Log.Debug($"Picked {item.Item.Id}");
+				Debug.Log($"Picked {item.Item.Id}");
 			}
 		}
 
