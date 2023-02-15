@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 using Zenject;
 
+/// <summary>
+/// Load data from CharacterData
+/// </summary>
 public class KnowledgeUI : MonoBehaviour
 {
 	public GameObject knowledge;

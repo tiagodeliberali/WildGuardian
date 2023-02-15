@@ -7,6 +7,10 @@ using Zenject;
 
 namespace Assets.Character
 {
+	/// <summary>
+	/// Only deals with movements and animations related to that
+	/// Pauses movement on UI open
+	/// </summary>
 	public class CharacterMovement : MonoBehaviour
 	{
 		private SignalBus signalBus;

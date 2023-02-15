@@ -8,6 +8,11 @@ using Assets.Items;
 
 namespace Assets.Character
 {
+	/// <summary>
+	/// Close relation with UI
+	/// Exposes imutable data
+	/// Only mutable through methods
+	/// </summary>
 	public class CharacterData
 	{
 		public int MoneyAmount { get; private set; }

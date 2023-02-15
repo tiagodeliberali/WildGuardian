@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 using Zenject;
 
+/// <summary>
+/// Changes to items are communicated through signal
+/// </summary>
 public class InvetoryItemUI : MonoBehaviour
 {
 	private ItemInstance item;
@@ -36,7 +39,7 @@ public class InvetoryItemUI : MonoBehaviour
 		Remove();
 	}
 
-	public void AssociateItem(ItemInstance item, SignalBus signalBus)
+	public void Associate(ItemInstance item, SignalBus signalBus)
 	{
 		this.item = item;
 		this.signalBus = signalBus;

@@ -11,6 +11,9 @@ using UnityEngine.UI;
 
 using Zenject;
 
+/// <summary>
+/// Loads all data from CharacterData
+/// </summary>
 public class InventoryUI : MonoBehaviour
 {
 	public List<InvetoryItemUI> InventoryItems = new List<InvetoryItemUI>();
@@ -76,7 +79,7 @@ public class InventoryUI : MonoBehaviour
 			itemName.text = instance.Definition.itemName;
 
 			var controller = obj.GetComponent<InvetoryItemUI>();
-			controller.AssociateItem(instance, signalBus);
+			controller.Associate(instance, signalBus);
 			controller.SetRemoveButtonActive(EnableRemove.isOn);
 
 			InventoryItems.Add(controller);
