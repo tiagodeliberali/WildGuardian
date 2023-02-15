@@ -1,14 +1,20 @@
-﻿using Assets.Signals;
+﻿using Assets.Knowledge;
+using System.Collections.Generic;
+
+using Assets.Signals;
 
 using UnityEngine;
 
 using Zenject;
+using Assets.Items;
 
 namespace Assets.Character
 {
 	public class CharacterData
 	{
-		private SignalBus signalBus;
+		public Dictionary<string, KnowledgeItemInstance> knowledge = new Dictionary<string, KnowledgeItemInstance>();
+
+		public List<ItemInstance> inventory = new List<ItemInstance>();
 
 		public int MoneyAmount { get; set; }
 
@@ -19,7 +25,6 @@ namespace Assets.Character
 		[Inject]
 		public void Contruct(SignalBus signalBus)
 		{
-			this.signalBus = signalBus;
 			signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
 		}
 
@@ -27,13 +32,30 @@ namespace Assets.Character
 		{
 			if (item.Action.Equals(ItemAction.Pickup))
 			{
-				Debug.Log($"Picked {item.Item.Id}");
-
-				if (item.Item.Definition.type == Items.ItemType.Money)
+				switch (item.Item.Definition.type)
 				{
-					AddMoney(item.Item.Definition.eggValue);
+					case ItemType.Egg:
+						AddKnowledge(item.Item.Definition);
+						inventory.Add(item.Item);
+						break;
+					case ItemType.Drop:
+						inventory.Add(item.Item);
+						break;
+					case ItemType.Money:
+						AddMoney(item.Item.Definition.eggValue);
+						break;
 				}
 			}
+		}
+
+		private void AddKnowledge(Item definition)
+		{
+			if (!knowledge.ContainsKey(definition.itemName))
+			{
+				knowledge.Add(definition.itemName, new KnowledgeItemInstance(definition));
+			}
+
+			knowledge[definition.itemName].Add();
 		}
 
 		public bool CanSpendMoney(int amount)

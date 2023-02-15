@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using Assets.Character;
 using Assets.Knowledge;
 using Assets.Signals;
 
@@ -12,7 +13,6 @@ using Zenject;
 
 public class KnowledgeUI : MonoBehaviour
 {
-	public SignalBus signalBus;
 	public GameObject knowledge;
 	public GameObject details;
 
@@ -33,29 +33,20 @@ public class KnowledgeUI : MonoBehaviour
 	public TextMeshProUGUI food;
 	public TextMeshProUGUI count;
 
-	private Dictionary<string, KnowledgeItemInstance> items = new Dictionary<string, KnowledgeItemInstance>();
-
 	// Used to instantiate items UI on the inventory
 	public Transform ItemPlaceholder;
 	public GameObject InventoryItem;
 
+
+	private SignalBus signalBus;
+	private CharacterData character;
+	private List<KnowledgeItemUI> knowledgeItems = new List<KnowledgeItemUI>();
+
 	[Inject]
-	public void Contruct(SignalBus signalBus)
+	public void Contruct(SignalBus signalBus, CharacterData character)
 	{
 		this.signalBus = signalBus;
-	}
-
-	private void Awake()
-	{
-		signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
-	}
-
-	private void OnItemActionHappened(ItemActionSignal itemAction)
-	{
-		if (itemAction.Action.Equals(ItemAction.Pickup))
-		{
-			CollectItem(itemAction.Item.Definition);
-		}
+		this.character = character;
 	}
 
 	public void OpenWindow()
@@ -64,35 +55,44 @@ public class KnowledgeUI : MonoBehaviour
 		details.SetActive(false);
 		
 		signalBus.Fire(UISignal.Opened());
+		LoadItems();
 	}
 
 	public void CloseWindow()
 	{
 		knowledge.SetActive(false);
 		signalBus.Fire(UISignal.Closed());
+		ClearItems();
 	}
 
-	public void CollectItem(Item item)
+	public void LoadItems()
 	{
-		if (!items.ContainsKey(item.name))
+		foreach (var item in character.knowledge.Values)
 		{
-			items.Add(item.name, new KnowledgeItemInstance(item));
-
 			GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
 
 			var itemName = obj.transform.Find("Icon").GetComponent<Image>();
-			itemName.sprite = item.icon;
+			itemName.sprite = item.Definition.icon;
 
 			var controller = obj.GetComponent<KnowledgeItemUI>();
-			controller.AssociateItem(item.name, this);
-		}
+			controller.AssociateItem(item, this);
 
-		items[item.name].Add();
+			knowledgeItems.Add(controller);
+		}
 	}
 
-	public void SelectItem(string name)
+	private void ClearItems()
 	{
-		var instance = items[name];
+		foreach (var item in knowledgeItems)
+		{
+			item.Remove();
+		}
+
+		knowledgeItems.Clear();
+	}
+
+	public void SelectItem(KnowledgeItemInstance instance)
+	{
 		var definition = instance.Definition;
 
 		icon.sprite = definition.icon;
