@@ -1,4 +1,4 @@
-using System;
+using Assets.Items;
 
 using UnityEngine;
 
@@ -18,10 +18,3 @@ public class Item : ScriptableObject
 	public int timeToGrow;
 	public string food;
 }
-
-public enum ItemType
-{
-	Egg,
-	Drop
-}
-
