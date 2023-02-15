@@ -52,7 +52,7 @@ public class KnowledgeUI : MonoBehaviour
 
 	public void LoadItems()
 	{
-		foreach (var item in character.knowledge.Values)
+		foreach (var item in character.Knowledge.Values)
 		{
 			GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
 

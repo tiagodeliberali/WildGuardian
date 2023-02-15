@@ -65,7 +65,7 @@ public class InventoryUI : MonoBehaviour
 
 	private void LoadItems()
 	{
-		foreach (var instance in character.inventory)
+		foreach (var instance in character.Inventory)
 		{
 			GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
 

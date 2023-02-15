@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 using Assets.Signals;
 
-using UnityEngine;
-
 using Zenject;
 using Assets.Items;
 
@@ -12,16 +10,19 @@ namespace Assets.Character
 {
 	public class CharacterData
 	{
-		public Dictionary<string, KnowledgeItemInstance> knowledge = new Dictionary<string, KnowledgeItemInstance>();
-
-		public List<ItemInstance> inventory = new List<ItemInstance>();
-
-		public int MoneyAmount { get; set; }
+		public int MoneyAmount { get; private set; }
 
 		public delegate void EventHandler(int amount);
 
 		public event EventHandler OnMoneyAmountChanged;
 
+		public IReadOnlyDictionary<string, KnowledgeItemInstance> Knowledge => knowledge;
+
+		public IReadOnlyList<ItemInstance> Inventory => inventory;
+
+		private Dictionary<string, KnowledgeItemInstance> knowledge = new Dictionary<string, KnowledgeItemInstance>();
+		private List<ItemInstance> inventory = new List<ItemInstance>();
+		
 		[Inject]
 		public void Contruct(SignalBus signalBus)
 		{
