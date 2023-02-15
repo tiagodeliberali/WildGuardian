@@ -51,6 +51,12 @@ public class KnowledgeUI : MonoBehaviour
 
 	public void OpenWindow()
 	{
+		if (knowledge.activeSelf)
+		{
+			CloseWindow();
+			return;
+		}
+
 		knowledge.SetActive(true);
 		details.SetActive(false);
 		

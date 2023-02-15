@@ -35,6 +35,12 @@ public class InventoryUI : MonoBehaviour
 
 	public void OpenWindow()
 	{
+		if (Inventory.activeSelf)
+		{
+			CloseWindow();
+			return;
+		}
+
 		Inventory.SetActive(true);
 		signalBus.Fire(UISignal.Opened());
 		LoadItems();
