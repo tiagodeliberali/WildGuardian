@@ -51,7 +51,7 @@ public class InventoryUI : MonoBehaviour
 	{
 		foreach (var item in InventoryItems)
 		{
-			item.RemoveItem();
+			item.Remove();
 		}
 
 		InventoryItems.Clear();
@@ -70,7 +70,7 @@ public class InventoryUI : MonoBehaviour
 			itemName.text = instance.Definition.itemName;
 
 			var controller = obj.GetComponent<InvetoryItemUI>();
-			controller.AssociateItem(instance);
+			controller.AssociateItem(instance, signalBus);
 			controller.SetRemoveButtonActive(EnableRemove.isOn);
 
 			InventoryItems.Add(controller);

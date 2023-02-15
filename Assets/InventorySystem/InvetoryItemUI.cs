@@ -14,32 +14,32 @@ public class InvetoryItemUI : MonoBehaviour
 
 	public Button RemoveButton;
 
-	[Inject]
-	public void Contruct(SignalBus signalBus)
-	{
-		this.signalBus = signalBus;
-	}
-
 	private void Awake()
 	{
 		itemButtom = gameObject.GetComponent<Button>();
 	}
 
-	public void RemoveItem()
+	public void Remove()
+	{
+		Destroy(gameObject);
+	}
+
+	public void DropItem()
 	{
 		signalBus.Fire(ItemActionSignal.Drop(item));
-		Destroy(gameObject);
+		Remove();
 	}
 
 	public void UseItem()
 	{
 		signalBus.Fire(ItemActionSignal.Use(item));
-		Destroy(gameObject);
+		Remove();
 	}
 
-	public void AssociateItem(ItemInstance item)
+	public void AssociateItem(ItemInstance item, SignalBus signalBus)
 	{
 		this.item = item;
+		this.signalBus = signalBus;
 	}
 
 	public void SetRemoveButtonActive(bool active)
