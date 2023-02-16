@@ -3,6 +3,7 @@
 	public enum ItemType
 	{
 		Egg,
+		Puppy,
 		Drop,
 		Money
 	}

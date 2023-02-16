@@ -9,12 +9,5 @@ public class Item : ScriptableObject
 	public ItemType type;
 	public Sprite icon;
 	public string description;
-	public string incubator;
-	public int eggValue;
-	public int puppyValue;
-	public string drop;
-	public int dropValue;
-	public int timeToHatch;
-	public int timeToGrow;
-	public string food;
+	public int value;
 }

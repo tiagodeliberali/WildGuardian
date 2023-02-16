@@ -9,19 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf0da52cf5435e42ab37850e6e67db2, type: 3}
-  m_Name: ColorfulEgg
+  m_Script: {fileID: 11500000, guid: c291b21cd6c19ea448427f67f0f4a256, type: 3}
+  m_Name: DuckEgg
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: Colorido
+  itemName: Ovo de pato
   type: 0
   icon: {fileID: 991795241, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}
-  description: "Um dragonete todo colorido que \xE9 capaz de produzir arco \xEDris!"
-  incubator: Simples
-  eggValue: 25
-  puppyValue: 70
-  drop: "Pedra arco-\xEDris"
-  dropValue: 30
-  timeToHatch: 5
-  timeToGrow: 13
-  food: Milho
+  description: "Um bel\xEDssimo ovo de dragonete pato!"
+  value: 50
+  timeToNext: 10
+  next: {fileID: 11400000, guid: f0dbafe407ef79f49a06597fa5d2601c, type: 2}
+  animalType: 0

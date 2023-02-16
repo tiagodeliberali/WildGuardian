@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 762686364865463875}
   - component: {fileID: 762686364865463873}
   m_Layer: 0
-  m_Name: Fire
+  m_Name: DuckEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 985908904, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}
+  m_Sprite: {fileID: 991795241, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,9 +99,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0025428534}
+  m_Offset: {x: 0, y: -0.0067420006}
   serializedVersion: 2
-  m_Radius: 0.0735883
+  m_Radius: 0.07661023
 --- !u!114 &762686364865463873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afb4adb1d0ffae499edafcb9b99c3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: c99c6c1b1a86f9c4ca90018a2bcdfb57, type: 2}
+  Item: {fileID: 11400000, guid: 8607fb3e9756ec147988e89f19a70421, type: 2}

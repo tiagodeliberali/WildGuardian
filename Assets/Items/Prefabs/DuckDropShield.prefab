@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 762686364865463875}
   - component: {fileID: 762686364865463873}
   m_Layer: 0
-  m_Name: Pie
+  m_Name: DuckDropShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 762686364865463879}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.72, y: 2.79, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -694303968, guid: cdc2d4c4ebc238f4893ef13b6ea2683d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b97c91e8b348f3f4ebdc11f5c82182cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,9 +99,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0038707615}
+  m_Offset: {x: 0.004986763, y: -0.014960289}
   serializedVersion: 2
-  m_Radius: 0.07266408
+  m_Radius: 1.0930996
 --- !u!114 &762686364865463873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afb4adb1d0ffae499edafcb9b99c3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 958663e3b95e55949b5ca60cdcac69a5, type: 2}
+  Item: {fileID: 11400000, guid: 8807258d328d49d40b6c8d4457414643, type: 2}

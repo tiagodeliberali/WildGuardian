@@ -1,3 +1,6 @@
+using System.Linq;
+
+using Assets.Items;
 using Assets.Knowledge;
 
 using TMPro;
@@ -10,20 +13,15 @@ public class KnowledgeDetailsUI : MonoBehaviour
 	public GameObject details;
 
 	public Image icon;
-
 	public TextMeshProUGUI itemName;
 	public TextMeshProUGUI description;
-	public TextMeshProUGUI incubator;
+	public TextMeshProUGUI value;
 
-	public TextMeshProUGUI eggValue;
-	public TextMeshProUGUI puppyValue;
-	public TextMeshProUGUI drop;
 
-	public TextMeshProUGUI dropValue;
-	public TextMeshProUGUI timeToHatch;
-	public TextMeshProUGUI timeToGrow;
-
-	public TextMeshProUGUI food;
+	public TextMeshProUGUI incubatorOrFood;
+	public TextMeshProUGUI timeToNext;
+	public TextMeshProUGUI next;
+	
 	public TextMeshProUGUI count;
 
 	public void SetActive(bool active)
@@ -36,20 +34,28 @@ public class KnowledgeDetailsUI : MonoBehaviour
 		var definition = instance.Definition;
 
 		icon.sprite = definition.icon;
-
 		itemName.text = definition.itemName;
 		description.text = definition.description;
-		incubator.text = definition.incubator;
+		value.text = $"$ {definition.value}";
 
-		eggValue.text = $"$ {definition.eggValue}";
-		puppyValue.text = $"$ {definition.puppyValue}";
-		drop.text = definition.drop;
+		bool isAnimal = new ItemType[] { ItemType.Egg, ItemType.Puppy }.Contains(instance.Definition.type);
 
-		dropValue.text = $"$ {definition.dropValue}";
-		timeToHatch.text = $"{definition.timeToHatch} dias";
-		timeToGrow.text = $"{definition.timeToGrow} dias";
+		if (isAnimal)
+		{
+			var animal = instance.Definition as Animal;
 
-		food.text = definition.food;
+			incubatorOrFood.text = instance.Definition.type.Equals(ItemType.Egg) 
+				? animal.GetIncubator() 
+				: animal.GetFood();
+
+			timeToNext.text = $"{animal.timeToNext} dias";
+			next.text = animal.next.itemName;
+		}
+
+		incubatorOrFood.transform.parent.gameObject.SetActive(isAnimal);
+		timeToNext.transform.parent.gameObject.SetActive(isAnimal);
+		next.transform.parent.gameObject.SetActive(isAnimal);
+
 		count.text = $"{instance.Count}";
 
 		details.SetActive(true);

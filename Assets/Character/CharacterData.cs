@@ -40,15 +40,14 @@ namespace Assets.Character
 			{
 				switch (item.Item.Definition.type)
 				{
+					case ItemType.Puppy:
 					case ItemType.Egg:
+					case ItemType.Drop:
 						AddKnowledge(item.Item.Definition);
 						inventory.Add(item.Item);
 						break;
-					case ItemType.Drop:
-						inventory.Add(item.Item);
-						break;
 					case ItemType.Money:
-						AddMoney(item.Item.Definition.eggValue);
+						AddMoney(item.Item.Definition.value);
 						break;
 				}
 			}
@@ -57,8 +56,7 @@ namespace Assets.Character
 				switch (item.Item.Definition.type)
 				{
 					case ItemType.Egg:
-						inventory.Remove(item.Item);
-						break;
+					case ItemType.Puppy:
 					case ItemType.Drop:
 						inventory.Remove(item.Item);
 						break;

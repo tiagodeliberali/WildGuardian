@@ -1,5 +1,3 @@
-using System;
-
 using Assets.Items;
 using Assets.Signals;
 
