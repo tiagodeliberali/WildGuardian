@@ -9,6 +9,8 @@ public class GameInstaller : MonoInstaller
 	
 	public KnowledgeUI knowledgeManager;
 
+	public TimeManager timeManager;
+
 	public override void InstallBindings()
 	{
 		SignalBusInstaller.Install(Container);
@@ -16,6 +18,9 @@ public class GameInstaller : MonoInstaller
 		Container.Bind<CharacterData>()
 			.FromNew()
 			.AsSingle();
+
+		Container.Bind<TimeManager>()
+			.FromInstance(timeManager);
 
 		Container.Bind<InventoryUI>()
 			.FromInstance(inventoryManager);
