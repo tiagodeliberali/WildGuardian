@@ -12,33 +12,31 @@ public class TimeManager : MonoBehaviour
 	public event TimeEventDelegate OnDayChanged;
     public event TimeEventDelegate OnLightChanged;
 
-    public TimeData time { get; private set; }
+    public TimeData TimeData { get; private set; } = new TimeData();
 
 	private TimeSpan currentTime;
 
 	void Start()
     {
-        // load from previous state...
-        time = new TimeData();
-		currentTime = DateTime.Now.TimeOfDay;
+        currentTime = DateTime.Now.TimeOfDay;
 	}
 
 	private void FixedUpdate()
 	{
 		if ((DateTime.Now.TimeOfDay - currentTime).TotalSeconds > 5)
         {
-            time = time.TickHour();
+            TimeData = TimeData.TickHour();
 
-            if (time.IsNewDay())
+            if (TimeData.IsNewDay())
             {
-                OnDayChanged?.Invoke(time);
+                OnDayChanged?.Invoke(TimeData);
             }
 
-            OnHourChanged?.Invoke(time);
+            OnHourChanged?.Invoke(TimeData);
 
-            if (time.IsTimeToChangeDayLight())
+            if (TimeData.IsTimeToChangeDayLight())
             {
-                OnLightChanged?.Invoke(time);
+                OnLightChanged?.Invoke(TimeData);
             }
 
             currentTime = DateTime.Now.TimeOfDay;

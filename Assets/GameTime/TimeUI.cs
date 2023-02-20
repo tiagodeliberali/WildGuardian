@@ -19,18 +19,14 @@ public class TimeUI : MonoBehaviour
 		this.timeManager = timeManager;
 		timeManager.OnDayChanged += TimeManager_OnDayChanged;
 		timeManager.OnHourChanged += TimeManager_OnHourChanged;
-	}
 
-	private void Start()
-	{
-		Day.text = $"Dia {timeManager.time.Day}";
-		Hour.text = $"{timeManager.time.Hour}:00";
+		Day.text = $"Dia {timeManager.TimeData.Day}";
+		Hour.text = $"{timeManager.TimeData.Hour}:00";
 	}
 
 	private void TimeManager_OnHourChanged(TimeData time)
 	{
 		Hour.text = $"{time.Hour}:00";
-		
 	}
 
 	private void TimeManager_OnDayChanged(TimeData time)
