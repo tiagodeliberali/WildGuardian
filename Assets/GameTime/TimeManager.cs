@@ -1,5 +1,6 @@
 using System;
 
+using Assets;
 using Assets.GameTime;
 
 using UnityEngine;
@@ -23,7 +24,7 @@ public class TimeManager : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if ((DateTime.Now.TimeOfDay - currentTime).TotalSeconds > 5)
+		if ((DateTime.Now.TimeOfDay - currentTime).TotalSeconds > GameConfiguration.TimeToElapseOneHour)
         {
             TimeData = TimeData.TickHour();
 

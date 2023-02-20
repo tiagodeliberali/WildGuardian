@@ -11,7 +11,7 @@ namespace Assets.GameTime
 		private long endTime;
 		private long lerpDuration;
 
-		private TimeSpan DefaultLerpDuration = TimeSpan.FromSeconds(2);
+		private TimeSpan DefaultLerpDuration = TimeSpan.FromSeconds(GameConfiguration.TimeToChangeLightInSecods);
 
 		public LerpTime(float startValue, float endValue) 
 		{

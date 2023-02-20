@@ -2,11 +2,6 @@
 {
 	public class TimeData
 	{
-		private const int StartOfMorning = 6;
-		private const int StartOfNoon = 8;
-		private const int StartOfAfternoon = 18;
-		private const int StartOfNight = 20;
-
 		public readonly int Day;
 		public readonly int Hour;
 
@@ -14,16 +9,16 @@
 		{
 			get
 			{
-				if (Hour < StartOfMorning) 
+				if (Hour < GameConfiguration.StartOfMorning) 
 					return TimeOfDay.Night;
 
-				if (Hour < StartOfNoon)
+				if (Hour < GameConfiguration.StartOfNoon)
 					return TimeOfDay.Morning;
 
-				if (Hour < StartOfAfternoon)
+				if (Hour < GameConfiguration.StartOfAfternoon)
 					return TimeOfDay.Noon;
 
-				if (Hour < StartOfNight)
+				if (Hour < GameConfiguration.StartOfNight)
 					return TimeOfDay.Afternoon;
 
 				return TimeOfDay.Night;
@@ -58,10 +53,10 @@
 
 		public bool IsTimeToChangeDayLight()
 		{
-			return Hour == StartOfMorning
-				|| Hour == StartOfNoon
-				|| Hour == StartOfAfternoon
-				|| Hour == StartOfNight;
+			return Hour == GameConfiguration.StartOfMorning
+				|| Hour == GameConfiguration.StartOfNoon
+				|| Hour == GameConfiguration.StartOfAfternoon
+				|| Hour == GameConfiguration.StartOfNight;
 		}
 
 		public bool IsNewDay()

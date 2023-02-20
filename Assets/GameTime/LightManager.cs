@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Assets;
 using Assets.GameTime;
 
 using UnityEngine;
@@ -67,20 +67,20 @@ public class LightManager : MonoBehaviour
 		switch (time.TimeOfDay)
 		{
 			case TimeOfDay.Morning:
-				nextGlobalIntensity = 0.7f;
-				nextLightsIntensity = 0.2f;
+				nextGlobalIntensity = GameConfiguration.LightMorningGlobalIntensity;
+				nextLightsIntensity = GameConfiguration.LightMorningLightsIntensity;
 				break;
 			case TimeOfDay.Noon:
-				nextGlobalIntensity = 1;
-				nextLightsIntensity = 0;
+				nextGlobalIntensity = GameConfiguration.LightNoonGlobalIntensity;
+				nextLightsIntensity = GameConfiguration.LightNoonLightsIntensity;
 				break;
 			case TimeOfDay.Afternoon:
-				nextGlobalIntensity = 0.6f;
-				nextLightsIntensity = 0.3f;
+				nextGlobalIntensity = GameConfiguration.LightAfternoonGlobalIntensity;
+				nextLightsIntensity = GameConfiguration.LightAfternoonLightsIntensity;
 				break;
 			case TimeOfDay.Night:
-				nextGlobalIntensity = 0.2f;
-				nextLightsIntensity = 0.8f;
+				nextGlobalIntensity = GameConfiguration.LightNightGlobalIntensity;
+				nextLightsIntensity = GameConfiguration.LightNightLightsIntensity;
 				break;
 		}
 
