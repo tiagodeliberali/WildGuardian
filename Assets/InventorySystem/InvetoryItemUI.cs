@@ -1,3 +1,4 @@
+using Assets.InventorySystem;
 using Assets.Items;
 using Assets.Signals;
 
@@ -14,7 +15,7 @@ public class InvetoryItemUI : MonoBehaviour
 	private ItemInstance item;
 	private Button itemButtom;
 	private SignalBus signalBus;
-
+	private IAssociateInventory association;
 	public Button RemoveButton;
 
 	private void Awake()
@@ -35,14 +36,18 @@ public class InvetoryItemUI : MonoBehaviour
 
 	public void UseItem()
 	{
-		signalBus.Fire(ItemActionSignal.Use(item));
-		Remove();
+		if (association?.SelectItem(item) ?? true)
+		{
+			signalBus.Fire(ItemActionSignal.Use(item));
+			Remove();
+		}
 	}
 
-	public void Associate(ItemInstance item, SignalBus signalBus)
+	public void Associate(ItemInstance item, SignalBus signalBus, IAssociateInventory association)
 	{
 		this.item = item;
 		this.signalBus = signalBus;
+		this.association = association;
 	}
 
 	public void SetRemoveButtonActive(bool active)

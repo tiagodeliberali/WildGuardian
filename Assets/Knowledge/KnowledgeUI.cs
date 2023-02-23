@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Assets.Character;
@@ -29,6 +30,16 @@ public class KnowledgeUI : MonoBehaviour
 	{
 		this.signalBus = signalBus;
 		this.character = character;
+
+		signalBus.Subscribe<UISignal>(this.OnUIStateChange);
+	}
+
+	private void OnUIStateChange(UISignal signal)
+	{
+		if (knowledge.activeSelf && signal.IsOpen)
+		{
+			CloseWindow();
+		}
 	}
 
 	public void OpenWindow()
@@ -39,10 +50,11 @@ public class KnowledgeUI : MonoBehaviour
 			return;
 		}
 
+		signalBus.Fire(UISignal.Opened());
+
 		knowledge.SetActive(true);
 		knowledgeDetails.SetActive(false);
 		
-		signalBus.Fire(UISignal.Opened());
 		LoadItems();
 	}
 

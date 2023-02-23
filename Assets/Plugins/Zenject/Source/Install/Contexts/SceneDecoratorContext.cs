@@ -12,13 +12,13 @@ namespace Zenject
     public class SceneDecoratorContext : Context
     {
         [SerializeField]
-        List<MonoInstaller> _lateInstallers = new List<MonoInstaller>();
+        System.Collections.Generic.List<MonoInstaller> _lateInstallers = new System.Collections.Generic.List<MonoInstaller>();
 
         [SerializeField]
-        List<MonoInstaller> _lateInstallerPrefabs = new List<MonoInstaller>();
+        System.Collections.Generic.List<MonoInstaller> _lateInstallerPrefabs = new System.Collections.Generic.List<MonoInstaller>();
 
         [SerializeField]
-        List<ScriptableObjectInstaller> _lateScriptableObjectInstallers = new List<ScriptableObjectInstaller>();
+        System.Collections.Generic.List<ScriptableObjectInstaller> _lateScriptableObjectInstallers = new System.Collections.Generic.List<ScriptableObjectInstaller>();
 
         public IEnumerable<MonoInstaller> LateInstallers
         {
@@ -55,7 +55,7 @@ namespace Zenject
         string _decoratedContractName = null;
 
         DiContainer _container;
-        readonly List<MonoBehaviour> _injectableMonoBehaviours = new List<MonoBehaviour>();
+        readonly System.Collections.Generic.List<MonoBehaviour> _injectableMonoBehaviours = new System.Collections.Generic.List<MonoBehaviour>();
 
         public string DecoratedContractName
         {
@@ -104,7 +104,7 @@ namespace Zenject
             InstallInstallers();
         }
 
-        protected override void GetInjectableMonoBehaviours(List<MonoBehaviour> monoBehaviours)
+        protected override void GetInjectableMonoBehaviours(System.Collections.Generic.List<MonoBehaviour> monoBehaviours)
         {
             var scene = gameObject.scene;
 
@@ -114,7 +114,7 @@ namespace Zenject
 
         public void InstallLateDecoratorInstallers()
         {
-            InstallInstallers(new List<InstallerBase>(), new List<Type>(), _lateScriptableObjectInstallers, _lateInstallers, _lateInstallerPrefabs);
+            InstallInstallers(new System.Collections.Generic.List<InstallerBase>(), new System.Collections.Generic.List<Type>(), _lateScriptableObjectInstallers, _lateInstallers, _lateInstallerPrefabs);
         }
     }
 }

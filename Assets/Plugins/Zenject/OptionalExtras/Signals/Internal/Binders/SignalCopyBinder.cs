@@ -5,16 +5,16 @@ namespace Zenject
     [NoReflectionBaking]
     public class SignalCopyBinder
     {
-        readonly List<BindInfo> _bindInfos;
+        readonly System.Collections.Generic.List<BindInfo> _bindInfos;
 
         public SignalCopyBinder()
         {
-            _bindInfos = new List<BindInfo>();
+            _bindInfos = new System.Collections.Generic.List<BindInfo>();
         }
 
         public SignalCopyBinder(BindInfo bindInfo)
         {
-            _bindInfos = new List<BindInfo>
+            _bindInfos = new System.Collections.Generic.List<BindInfo>
             {
                 bindInfo
             };

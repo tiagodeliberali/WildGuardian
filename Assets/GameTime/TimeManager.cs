@@ -2,8 +2,13 @@ using System;
 
 using Assets;
 using Assets.GameTime;
+using Assets.Signals;
+
+using Unity.VisualScripting.Antlr3.Runtime;
 
 using UnityEngine;
+
+using Zenject;
 
 public class TimeManager : MonoBehaviour
 {
@@ -16,6 +21,18 @@ public class TimeManager : MonoBehaviour
     public TimeData TimeData { get; private set; } = new TimeData();
 
 	private TimeSpan currentTime;
+	private bool paused;
+
+	[Inject]
+	public void Contruct(SignalBus signalBus)
+	{
+		signalBus.Subscribe<UISignal>(this.OnUIStateChange);
+	}
+
+	private void OnUIStateChange(UISignal signal)
+	{
+		paused = signal.IsOpen;
+	}
 
 	void Start()
     {
@@ -24,6 +41,12 @@ public class TimeManager : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (paused)
+		{
+			currentTime = DateTime.Now.TimeOfDay;
+			return;
+		}
+
 		if ((DateTime.Now.TimeOfDay - currentTime).TotalSeconds > GameConfiguration.TimeToElapseOneHour)
         {
             TimeData = TimeData.TickHour();

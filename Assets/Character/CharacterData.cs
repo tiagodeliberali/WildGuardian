@@ -51,7 +51,7 @@ namespace Assets.Character
 						break;
 				}
 			}
-			else if (item.Action.Equals(ItemAction.Drop))
+			else if (item.Action.Equals(ItemAction.Drop) || item.Action.Equals(ItemAction.Use))
 			{
 				switch (item.Item.Definition.type)
 				{

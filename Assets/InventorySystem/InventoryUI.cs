@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Assets.Character;
+using Assets.InventorySystem;
 using Assets.Items;
 using Assets.Signals;
 
@@ -29,11 +30,30 @@ public class InventoryUI : MonoBehaviour
 	public GameObject Inventory;
 	public Toggle EnableRemove;
 
+	private IAssociateInventory association; 
+
 	[Inject]
 	public void Contruct(SignalBus signalBus, CharacterData character)
 	{
 		this.signalBus = signalBus;
 		this.character = character;
+
+		signalBus.Subscribe<UISignal>(this.OnUIStateChange);
+	}
+
+	private void OnUIStateChange(UISignal signal)
+	{
+		if (Inventory.activeSelf && signal.IsOpen)
+		{
+			CloseWindow();
+		}
+	}
+
+	public void OpenWindow(IAssociateInventory association)
+	{
+		this.association = association;
+		OpenWindow();
+		EnableItemsOfType(association.GetItemType());
 	}
 
 	public void OpenWindow()
@@ -44,8 +64,9 @@ public class InventoryUI : MonoBehaviour
 			return;
 		}
 
-		Inventory.SetActive(true);
 		signalBus.Fire(UISignal.Opened());
+
+		Inventory.SetActive(true);
 		LoadItems();
 	}
 
@@ -54,6 +75,13 @@ public class InventoryUI : MonoBehaviour
 		Inventory.SetActive(false);
 		signalBus.Fire(UISignal.Closed());
 		ClearItems();
+
+		if (association != null)
+		{
+			association.CloseWindow();
+		}
+
+		association = null;
 	}
 
 	private void ClearItems()
@@ -79,7 +107,7 @@ public class InventoryUI : MonoBehaviour
 			itemName.text = instance.Definition.itemName;
 
 			var controller = obj.GetComponent<InvetoryItemUI>();
-			controller.Associate(instance, signalBus);
+			controller.Associate(instance, signalBus, association);
 			controller.SetRemoveButtonActive(EnableRemove.isOn);
 
 			InventoryItems.Add(controller);
@@ -94,7 +122,7 @@ public class InventoryUI : MonoBehaviour
 		}
 	}
 
-	public void EnableItemsOfType(ItemType type)
+	private void EnableItemsOfType(ItemType type)
 	{
 		foreach (var item in InventoryItems)
 		{
