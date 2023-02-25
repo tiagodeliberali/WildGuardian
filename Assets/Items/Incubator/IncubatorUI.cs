@@ -34,13 +34,13 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
 
     public void OpenUI()
     {
-        gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
         inventoryUI.OpenWindow(this);
     }
 
     public void CloseWindow()
     {
-        gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     public bool SelectItem(Item definition)

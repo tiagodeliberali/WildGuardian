@@ -20,18 +20,18 @@ public class InvetoryItemUI : MonoBehaviour
 
     private void Awake()
     {
-        itemButtom = gameObject.GetComponent<Button>();
+        itemButtom = this.gameObject.GetComponent<Button>();
     }
 
     public void Remove()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     public void DropItem()
     {
         signalBus.Fire(ItemActionSignal.Drop(item));
-        Remove();
+        this.Remove();
     }
 
     public void UseItem()
@@ -39,7 +39,7 @@ public class InvetoryItemUI : MonoBehaviour
         if (association?.SelectItem(item) ?? true)
         {
             signalBus.Fire(ItemActionSignal.Use(item));
-            Remove();
+            this.Remove();
         }
     }
 

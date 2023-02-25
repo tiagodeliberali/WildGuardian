@@ -10,18 +10,21 @@
             get
             {
                 if (Hour < GameConfiguration.StartOfMorning)
+                {
                     return TimeOfDay.Night;
+                }
 
                 if (Hour < GameConfiguration.StartOfNoon)
+                {
                     return TimeOfDay.Morning;
+                }
 
                 if (Hour < GameConfiguration.StartOfAfternoon)
+                {
                     return TimeOfDay.Noon;
+                }
 
-                if (Hour < GameConfiguration.StartOfNight)
-                    return TimeOfDay.Afternoon;
-
-                return TimeOfDay.Night;
+                return Hour < GameConfiguration.StartOfNight ? TimeOfDay.Afternoon : TimeOfDay.Night;
             }
         }
 

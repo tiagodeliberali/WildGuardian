@@ -1,9 +1,9 @@
-﻿using System;
-
-using UnityEngine;
-
-namespace Assets.GameTime
+﻿namespace Assets.GameTime
 {
+    using System;
+
+    using UnityEngine;
+
     public class LerpTime
     {
         private float startValue;

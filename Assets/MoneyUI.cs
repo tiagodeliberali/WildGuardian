@@ -13,11 +13,8 @@ public class MoneyUI : MonoBehaviour
     [Inject]
     public void Contruct(CharacterData character)
     {
-        character.OnMoneyAmountChanged += OnMoneyAmountChanged;
+        character.OnMoneyAmountChanged += this.OnMoneyAmountChanged;
     }
 
-    private void OnMoneyAmountChanged(int amount)
-    {
-        moneyUI.text = $"$ {amount}";
-    }
+    private void OnMoneyAmountChanged(int amount) => moneyUI.text = $"$ {amount}";
 }

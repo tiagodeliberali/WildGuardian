@@ -44,12 +44,12 @@ public class BuyTerrainUI : MonoBehaviour
         okButton.gameObject.SetActive(canBuyTerrain);
         notEnoughMoneyUI.gameObject.SetActive(!canBuyTerrain);
 
-        ShowUI();
+        this.ShowUI();
     }
 
     public void Close()
     {
-        HideUI();
+        this.HideUI();
     }
 
     public void Buy()
@@ -59,7 +59,7 @@ public class BuyTerrainUI : MonoBehaviour
         terrain?.Buy();
         terrain = null;
 
-        HideUI();
+        this.HideUI();
     }
 
     private void ShowUI()

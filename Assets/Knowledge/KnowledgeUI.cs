@@ -37,7 +37,7 @@ public class KnowledgeUI : MonoBehaviour
     {
         if (knowledge.activeSelf && signal.IsOpen)
         {
-            CloseWindow();
+            this.CloseWindow();
         }
     }
 
@@ -45,7 +45,7 @@ public class KnowledgeUI : MonoBehaviour
     {
         if (knowledge.activeSelf)
         {
-            CloseWindow();
+            this.CloseWindow();
             return;
         }
 
@@ -54,14 +54,14 @@ public class KnowledgeUI : MonoBehaviour
         knowledge.SetActive(true);
         knowledgeDetails.SetActive(false);
 
-        LoadItems();
+        this.LoadItems();
     }
 
     public void CloseWindow()
     {
         knowledge.SetActive(false);
         signalBus.Fire(UISignal.Closed());
-        ClearItems();
+        this.ClearItems();
     }
 
     public void LoadItems()

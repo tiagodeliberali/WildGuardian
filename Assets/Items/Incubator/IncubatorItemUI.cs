@@ -19,8 +19,8 @@ public class IncubatorItemUI : MonoBehaviour
         TotalDays = (definition as Animal).timeToNext;
         itemTime.text = $"({ElapsedDays}/{TotalDays})";
 
-        timeManager.OnDayChanged += TimeManager_OnDayChanged;
-        timeManager.OnHourChanged += TimeManager_OnDayChanged;
+        timeManager.OnDayChanged += this.TimeManager_OnDayChanged;
+        timeManager.OnHourChanged += this.TimeManager_OnDayChanged;
     }
 
     private void TimeManager_OnDayChanged(Assets.GameTime.TimeData time)
@@ -32,7 +32,7 @@ public class IncubatorItemUI : MonoBehaviour
         if (ElapsedDays == TotalDays)
         {
             incubatorUI.Remove(this);
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

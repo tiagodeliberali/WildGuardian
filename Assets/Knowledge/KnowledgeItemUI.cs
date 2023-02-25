@@ -20,6 +20,6 @@ public class KnowledgeItemUI : MonoBehaviour
 
     public void Remove()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }

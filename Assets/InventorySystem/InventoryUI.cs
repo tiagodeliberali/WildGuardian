@@ -45,36 +45,36 @@ public class InventoryUI : MonoBehaviour
     {
         if (Inventory.activeSelf && signal.IsOpen)
         {
-            CloseWindow();
+            this.CloseWindow();
         }
     }
 
     public void OpenWindow(IAssociateInventory association)
     {
         this.association = association;
-        OpenWindow();
-        EnableItemsOfType(association.GetItemType());
+        this.OpenWindow();
+        this.EnableItemsOfType(association.GetItemType());
     }
 
     public void OpenWindow()
     {
         if (Inventory.activeSelf)
         {
-            CloseWindow();
+            this.CloseWindow();
             return;
         }
 
         signalBus.Fire(UISignal.Opened());
 
         Inventory.SetActive(true);
-        LoadItems();
+        this.LoadItems();
     }
 
     public void CloseWindow()
     {
         Inventory.SetActive(false);
         signalBus.Fire(UISignal.Closed());
-        ClearItems();
+        this.ClearItems();
 
         if (association != null)
         {
@@ -88,7 +88,10 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (var item in InventoryItems)
         {
-            if (item != null) item.Remove();
+            if (item != null)
+            {
+                item.Remove();
+            }
         }
 
         InventoryItems.Clear();

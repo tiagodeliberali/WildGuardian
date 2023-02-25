@@ -1,12 +1,12 @@
-using Assets.Signals;
-
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-using Zenject;
-
 namespace Assets.Character
 {
+    using Assets.Signals;
+
+    using UnityEngine;
+    using UnityEngine.InputSystem;
+
+    using Zenject;
+
     /// <summary>
     /// Only deals with movements and animations related to that
     /// Pauses movement on UI open
@@ -30,8 +30,8 @@ namespace Assets.Character
 
         private void Awake()
         {
-            characterRigidBody = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
+            characterRigidBody = this.GetComponent<Rigidbody2D>();
+            animator = this.GetComponent<Animator>();
             signalBus.Subscribe<UISignal>(this.OnUIStateChange);
         }
 

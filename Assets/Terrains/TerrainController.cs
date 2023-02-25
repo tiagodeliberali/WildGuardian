@@ -8,7 +8,7 @@ public class TerrainController : MonoBehaviour
 
     public void Buy()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

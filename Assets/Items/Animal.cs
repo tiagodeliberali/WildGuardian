@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace Assets.Items
+﻿namespace Assets.Items
 {
+    using UnityEngine;
+
     [CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Animal")]
     public class Animal : Item
     {

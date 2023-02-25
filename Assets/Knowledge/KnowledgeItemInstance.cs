@@ -13,7 +13,7 @@
 
         public void Add()
         {
-            Count++;
+            this.Count++;
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Assets.Items;
-
-namespace Assets.InventorySystem
+﻿namespace Assets.InventorySystem
 {
+    using Assets.Items;
+
     public interface IAssociateInventory
     {
         void CloseWindow();

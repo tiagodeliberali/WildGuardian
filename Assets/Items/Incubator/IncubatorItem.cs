@@ -12,10 +12,7 @@ public class IncubatorItem : MonoBehaviour
     public int TotalDays;
     public int ElapsedDays;
 
-    private void Start()
-    {
-        icon = GetComponent<SpriteRenderer>();
-    }
+    private void Start() => this.icon = this.GetComponent<SpriteRenderer>();
 
     internal void Associate(Item definition, TimeManager timeManager)
     {
@@ -24,8 +21,8 @@ public class IncubatorItem : MonoBehaviour
 
         TotalDays = animal.timeToNext;
 
-        timeManager.OnDayChanged += TimeManager_OnDayChanged;
-        timeManager.OnHourChanged += TimeManager_OnDayChanged;
+        timeManager.OnDayChanged += this.TimeManager_OnDayChanged;
+        timeManager.OnHourChanged += this.TimeManager_OnDayChanged;
     }
 
     private void TimeManager_OnDayChanged(TimeData time)
@@ -39,18 +36,18 @@ public class IncubatorItem : MonoBehaviour
             var next = animal.next;
 
             icon.sprite = next.icon;
-            transform.localScale = new Vector3(0.4f, 0.4f, 1);
+            this.transform.localScale = new Vector3(0.4f, 0.4f, 1);
 
             if (next is Animal nextAnimal)
             {
                 animal = nextAnimal;
                 TotalDays = nextAnimal.timeToNext;
-                transform.localPosition += new Vector3(0, -1.5f, 0);
+                this.transform.localPosition += new Vector3(0, -1.5f, 0);
             }
             else
             {
-                timeManager.OnDayChanged -= TimeManager_OnDayChanged;
-                timeManager.OnHourChanged -= TimeManager_OnDayChanged;
+                timeManager.OnDayChanged -= this.TimeManager_OnDayChanged;
+                timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
             }
         }
     }

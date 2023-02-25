@@ -47,18 +47,18 @@ public class TimeManager : MonoBehaviour
 
         if ((DateTime.Now.TimeOfDay - currentTime).TotalSeconds > GameConfiguration.TimeToElapseOneHour)
         {
-            TimeData = TimeData.TickHour();
+            this.TimeData = this.TimeData.TickHour();
 
-            if (TimeData.IsNewDay())
+            if (this.TimeData.IsNewDay())
             {
-                OnDayChanged?.Invoke(TimeData);
+                OnDayChanged?.Invoke(this.TimeData);
             }
 
-            OnHourChanged?.Invoke(TimeData);
+            OnHourChanged?.Invoke(this.TimeData);
 
-            if (TimeData.IsTimeToChangeDayLight())
+            if (this.TimeData.IsTimeToChangeDayLight())
             {
-                OnLightChanged?.Invoke(TimeData);
+                OnLightChanged?.Invoke(this.TimeData);
             }
 
             currentTime = DateTime.Now.TimeOfDay;

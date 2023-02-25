@@ -18,6 +18,6 @@ public class ItemPickup : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         signalBus.Fire(ItemActionSignal.Pickup(Item));
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }

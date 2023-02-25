@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-
-using Assets.Items;
-using Assets.Knowledge;
-using Assets.Signals;
-
-using Zenject;
-
-namespace Assets.Character
+﻿namespace Assets.Character
 {
+    using System.Collections.Generic;
+
+    using Assets.Items;
+    using Assets.Knowledge;
+    using Assets.Signals;
+
+    using Zenject;
+
     /// <summary>
     /// Close relation with UI
     /// Exposes imutable data
@@ -43,11 +43,11 @@ namespace Assets.Character
                     case ItemType.Puppy:
                     case ItemType.Egg:
                     case ItemType.Drop:
-                        AddKnowledge(action.Item);
+                        this.AddKnowledge(action.Item);
                         inventory.Add(action.Item);
                         break;
                     case ItemType.Money:
-                        AddMoney(action.Item.value);
+                        this.AddMoney(action.Item.value);
                         break;
                 }
             }
@@ -78,25 +78,25 @@ namespace Assets.Character
 
         public bool CanSpendMoney(int amount)
         {
-            return amount <= MoneyAmount;
+            return amount <= this.MoneyAmount;
         }
 
         public bool SpendMoney(int amount)
         {
-            if (!CanSpendMoney(amount))
+            if (!this.CanSpendMoney(amount))
             {
                 return false;
             }
 
-            AddMoney(-amount);
+            this.AddMoney(-amount);
 
             return true;
         }
 
         public void AddMoney(int amount)
         {
-            MoneyAmount += amount;
-            OnMoneyAmountChanged?.Invoke(MoneyAmount);
+            this.MoneyAmount += amount;
+            OnMoneyAmountChanged?.Invoke(this.MoneyAmount);
         }
     }
 }

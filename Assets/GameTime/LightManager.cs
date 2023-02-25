@@ -23,7 +23,7 @@ public class LightManager : MonoBehaviour
     public void Contruct(TimeManager timeManager)
     {
         this.timeManager = timeManager;
-        timeManager.OnLightChanged += TimeManager_OnLightChanged;
+        timeManager.OnLightChanged += this.TimeManager_OnLightChanged;
     }
 
     private void Awake()
@@ -31,10 +31,7 @@ public class LightManager : MonoBehaviour
         lights = GameObject.FindGameObjectsWithTag("Light").Select(x => x.GetComponent<Light2D>()).ToList();
     }
 
-    private void Start()
-    {
-        SetLight(timeManager.TimeData);
-    }
+    private void Start() => this.SetLight(this.timeManager.TimeData);
 
     private void Update()
     {
@@ -54,10 +51,7 @@ public class LightManager : MonoBehaviour
         }
     }
 
-    private void TimeManager_OnLightChanged(TimeData time)
-    {
-        SetLight(time);
-    }
+    private void TimeManager_OnLightChanged(TimeData time) => this.SetLight(time);
 
     private void SetLight(TimeData time)
     {

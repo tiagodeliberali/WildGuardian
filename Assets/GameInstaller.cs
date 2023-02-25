@@ -13,22 +13,22 @@ public class GameInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        SignalBusInstaller.Install(Container);
+        SignalBusInstaller.Install(this.Container);
 
-        Container.Bind<CharacterData>()
+        this.Container.Bind<CharacterData>()
             .FromNew()
             .AsSingle();
 
-        Container.Bind<TimeManager>()
+        this.Container.Bind<TimeManager>()
             .FromInstance(timeManager);
 
-        Container.Bind<InventoryUI>()
+        this.Container.Bind<InventoryUI>()
             .FromInstance(inventoryManager);
 
-        Container.Bind<KnowledgeUI>()
+        this.Container.Bind<KnowledgeUI>()
             .FromInstance(knowledgeManager);
 
-        Container.DeclareSignal<UISignal>();
-        Container.DeclareSignal<ItemActionSignal>();
+        this.Container.DeclareSignal<UISignal>();
+        this.Container.DeclareSignal<ItemActionSignal>();
     }
 }
