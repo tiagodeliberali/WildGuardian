@@ -9,68 +9,68 @@ using Zenject;
 
 public class BuyTerrainUI : MonoBehaviour
 {
-	public GameObject buyTerrainUI;
+    public GameObject buyTerrainUI;
 
-	public SignalBus signalBus;
-	public CharacterData character;
+    public SignalBus signalBus;
+    public CharacterData character;
 
-	private TextMeshProUGUI buyTerrainAmount;
-	private Transform okButton;
-	private Transform notEnoughMoneyUI;
+    private TextMeshProUGUI buyTerrainAmount;
+    private Transform okButton;
+    private Transform notEnoughMoneyUI;
 
-	private TerrainController terrain;
+    private TerrainController terrain;
 
 
-	[Inject]
-	public void Contruct(SignalBus signalBus, CharacterData character)
-	{
-		this.signalBus = signalBus;
-		this.character = character;
-	}
+    [Inject]
+    public void Contruct(SignalBus signalBus, CharacterData character)
+    {
+        this.signalBus = signalBus;
+        this.character = character;
+    }
 
-	private void Awake()
-	{
-		okButton = buyTerrainUI.transform.Find("OkButton");
-		notEnoughMoneyUI = buyTerrainUI.transform.Find("NotEnoughMoney");
-		buyTerrainAmount = buyTerrainUI.transform.Find("Amount").GetComponent<TextMeshProUGUI>();
-	}
+    private void Awake()
+    {
+        okButton = buyTerrainUI.transform.Find("OkButton");
+        notEnoughMoneyUI = buyTerrainUI.transform.Find("NotEnoughMoney");
+        buyTerrainAmount = buyTerrainUI.transform.Find("Amount").GetComponent<TextMeshProUGUI>();
+    }
 
-	public void Select(TerrainController terrain)
-	{
-		this.terrain = terrain;
-		buyTerrainAmount.text = terrain.Amount.ToString();
+    public void Select(TerrainController terrain)
+    {
+        this.terrain = terrain;
+        buyTerrainAmount.text = terrain.Amount.ToString();
 
-		bool canBuyTerrain = character.CanSpendMoney(terrain.Amount);
-		okButton.gameObject.SetActive(canBuyTerrain);
-		notEnoughMoneyUI.gameObject.SetActive(!canBuyTerrain);
+        bool canBuyTerrain = character.CanSpendMoney(terrain.Amount);
+        okButton.gameObject.SetActive(canBuyTerrain);
+        notEnoughMoneyUI.gameObject.SetActive(!canBuyTerrain);
 
-		ShowUI();
-	}
+        ShowUI();
+    }
 
-	public void Close()
-	{
-		HideUI();
-	}
+    public void Close()
+    {
+        HideUI();
+    }
 
-	public void Buy()
-	{
-		character.SpendMoney(terrain.Amount);
+    public void Buy()
+    {
+        character.SpendMoney(terrain.Amount);
 
-		terrain?.Buy();
-		terrain = null;
+        terrain?.Buy();
+        terrain = null;
 
-		HideUI();
-	}
+        HideUI();
+    }
 
-	private void ShowUI()
-	{
-		buyTerrainUI.SetActive(true);
-		signalBus.Fire(UISignal.Opened());
-	}
+    private void ShowUI()
+    {
+        buyTerrainUI.SetActive(true);
+        signalBus.Fire(UISignal.Opened());
+    }
 
-	private void HideUI()
-	{
-		buyTerrainUI.SetActive(false);
-		signalBus.Fire(UISignal.Closed());
-	}
+    private void HideUI()
+    {
+        buyTerrainUI.SetActive(false);
+        signalBus.Fire(UISignal.Closed());
+    }
 }

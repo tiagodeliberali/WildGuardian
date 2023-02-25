@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class KnowledgeItemUI : MonoBehaviour
 {
-	private KnowledgeItemInstance item;
-	private KnowledgeDetailsUI knowledgeDetails;
+    private KnowledgeItemInstance item;
+    private KnowledgeDetailsUI knowledgeDetails;
 
-	public void Click()
+    public void Click()
     {
         knowledgeDetails.SelectItem(item);
-	}
+    }
 
-	public void AssociateItem(KnowledgeItemInstance item, KnowledgeDetailsUI knowledgeManager)
-	{
-		this.item = item;
-		this.knowledgeDetails = knowledgeManager;
-	}
+    public void AssociateItem(KnowledgeItemInstance item, KnowledgeDetailsUI knowledgeManager)
+    {
+        this.item = item;
+        this.knowledgeDetails = knowledgeManager;
+    }
 
-	public void Remove()
-	{
-		Destroy(gameObject);
-	}
+    public void Remove()
+    {
+        Destroy(gameObject);
+    }
 }

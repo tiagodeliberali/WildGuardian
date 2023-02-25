@@ -1,9 +1,9 @@
 ﻿namespace Assets.Items
 {
-	public enum AnimalType
-	{
-		basic,
-		fire,
-		ice
-	}
+    public enum AnimalType
+    {
+        basic,
+        fire,
+        ice
+    }
 }

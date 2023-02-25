@@ -6,33 +6,33 @@ using UnityEngine;
 
 public class IncubatorItemUI : MonoBehaviour
 {
-	private IncubatorUI incubatorUI;
-	public int TotalDays;
-	public int ElapsedDays;
+    private IncubatorUI incubatorUI;
+    public int TotalDays;
+    public int ElapsedDays;
 
-	public TextMeshProUGUI itemTime;
+    public TextMeshProUGUI itemTime;
 
-	internal void Associate(Item definition, TimeManager timeManager, IncubatorUI incubatorUI)
-	{
-		this.incubatorUI = incubatorUI;
+    internal void Associate(Item definition, TimeManager timeManager, IncubatorUI incubatorUI)
+    {
+        this.incubatorUI = incubatorUI;
 
-		TotalDays = (definition as Animal).timeToNext;
-		itemTime.text = $"({ElapsedDays}/{TotalDays})";
+        TotalDays = (definition as Animal).timeToNext;
+        itemTime.text = $"({ElapsedDays}/{TotalDays})";
 
-		timeManager.OnDayChanged += TimeManager_OnDayChanged;
-		timeManager.OnHourChanged += TimeManager_OnDayChanged;
-	}
+        timeManager.OnDayChanged += TimeManager_OnDayChanged;
+        timeManager.OnHourChanged += TimeManager_OnDayChanged;
+    }
 
-	private void TimeManager_OnDayChanged(Assets.GameTime.TimeData time)
-	{
-		ElapsedDays++;
+    private void TimeManager_OnDayChanged(Assets.GameTime.TimeData time)
+    {
+        ElapsedDays++;
 
-		itemTime.text = $"({ElapsedDays}/{TotalDays})";
+        itemTime.text = $"({ElapsedDays}/{TotalDays})";
 
-		if (ElapsedDays == TotalDays)
-		{
-			incubatorUI.Remove(this);
-			Destroy(gameObject);
-		}
-	}
+        if (ElapsedDays == TotalDays)
+        {
+            incubatorUI.Remove(this);
+            Destroy(gameObject);
+        }
+    }
 }

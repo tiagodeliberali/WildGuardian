@@ -8,16 +8,16 @@ using Zenject;
 
 public class MoneyUI : MonoBehaviour
 {
-	public TextMeshProUGUI moneyUI;
+    public TextMeshProUGUI moneyUI;
 
-	[Inject]
-	public void Contruct(CharacterData character)
-	{
-		character.OnMoneyAmountChanged += OnMoneyAmountChanged;
-	}
+    [Inject]
+    public void Contruct(CharacterData character)
+    {
+        character.OnMoneyAmountChanged += OnMoneyAmountChanged;
+    }
 
-	private void OnMoneyAmountChanged(int amount)
-	{
-		moneyUI.text = $"$ {amount}"; 
-	}
+    private void OnMoneyAmountChanged(int amount)
+    {
+        moneyUI.text = $"$ {amount}";
+    }
 }

@@ -5,30 +5,30 @@ using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
-	public InventoryUI inventoryManager;
-	
-	public KnowledgeUI knowledgeManager;
+    public InventoryUI inventoryManager;
 
-	public TimeManager timeManager;
+    public KnowledgeUI knowledgeManager;
 
-	public override void InstallBindings()
-	{
-		SignalBusInstaller.Install(Container);
+    public TimeManager timeManager;
 
-		Container.Bind<CharacterData>()
-			.FromNew()
-			.AsSingle();
+    public override void InstallBindings()
+    {
+        SignalBusInstaller.Install(Container);
 
-		Container.Bind<TimeManager>()
-			.FromInstance(timeManager);
+        Container.Bind<CharacterData>()
+            .FromNew()
+            .AsSingle();
 
-		Container.Bind<InventoryUI>()
-			.FromInstance(inventoryManager);
+        Container.Bind<TimeManager>()
+            .FromInstance(timeManager);
 
-		Container.Bind<KnowledgeUI>()
-			.FromInstance(knowledgeManager);
+        Container.Bind<InventoryUI>()
+            .FromInstance(inventoryManager);
 
-		Container.DeclareSignal<UISignal>();
-		Container.DeclareSignal<ItemActionSignal>();
-	}
+        Container.Bind<KnowledgeUI>()
+            .FromInstance(knowledgeManager);
+
+        Container.DeclareSignal<UISignal>();
+        Container.DeclareSignal<ItemActionSignal>();
+    }
 }

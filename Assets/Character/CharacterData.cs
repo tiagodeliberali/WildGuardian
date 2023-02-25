@@ -1,102 +1,102 @@
-﻿using Assets.Knowledge;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+using Assets.Items;
+using Assets.Knowledge;
 using Assets.Signals;
 
 using Zenject;
-using Assets.Items;
 
 namespace Assets.Character
 {
-	/// <summary>
-	/// Close relation with UI
-	/// Exposes imutable data
-	/// Only mutable through methods
-	/// </summary>
-	public class CharacterData
-	{
-		public int MoneyAmount { get; private set; }
+    /// <summary>
+    /// Close relation with UI
+    /// Exposes imutable data
+    /// Only mutable through methods
+    /// </summary>
+    public class CharacterData
+    {
+        public int MoneyAmount { get; private set; }
 
-		public delegate void EventHandler(int amount);
+        public delegate void EventHandler(int amount);
 
-		public event EventHandler OnMoneyAmountChanged;
+        public event EventHandler OnMoneyAmountChanged;
 
-		public IReadOnlyDictionary<string, KnowledgeItemInstance> Knowledge => knowledge;
+        public IReadOnlyDictionary<string, KnowledgeItemInstance> Knowledge => knowledge;
 
-		public IReadOnlyList<Item> Inventory => inventory;
+        public IReadOnlyList<Item> Inventory => inventory;
 
-		private Dictionary<string, KnowledgeItemInstance> knowledge = new Dictionary<string, KnowledgeItemInstance>();
-		private List<Item> inventory = new List<Item>();
-		
-		[Inject]
-		public void Contruct(SignalBus signalBus)
-		{
-			signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
-		}
+        private Dictionary<string, KnowledgeItemInstance> knowledge = new Dictionary<string, KnowledgeItemInstance>();
+        private List<Item> inventory = new List<Item>();
 
-		private void OnItemActionHappened(ItemActionSignal action)
-		{
-			if (action.Action.Equals(ItemAction.Pickup))
-			{
-				switch (action.Item.type)
-				{
-					case ItemType.Puppy:
-					case ItemType.Egg:
-					case ItemType.Drop:
-						AddKnowledge(action.Item);
-						inventory.Add(action.Item);
-						break;
-					case ItemType.Money:
-						AddMoney(action.Item.value);
-						break;
-				}
-			}
-			else if (action.Action.Equals(ItemAction.Drop) || action.Action.Equals(ItemAction.Use))
-			{
-				switch (action.Item.type)
-				{
-					case ItemType.Egg:
-					case ItemType.Puppy:
-					case ItemType.Drop:
-						inventory.Remove(action.Item);
-						break;
-					case ItemType.Money:
-						break;
-				}
-			}
-		}
+        [Inject]
+        public void Contruct(SignalBus signalBus)
+        {
+            signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
+        }
 
-		private void AddKnowledge(Item definition)
-		{
-			if (!knowledge.ContainsKey(definition.itemName))
-			{
-				knowledge.Add(definition.itemName, new KnowledgeItemInstance(definition));
-			}
+        private void OnItemActionHappened(ItemActionSignal action)
+        {
+            if (action.Action.Equals(ItemAction.Pickup))
+            {
+                switch (action.Item.type)
+                {
+                    case ItemType.Puppy:
+                    case ItemType.Egg:
+                    case ItemType.Drop:
+                        AddKnowledge(action.Item);
+                        inventory.Add(action.Item);
+                        break;
+                    case ItemType.Money:
+                        AddMoney(action.Item.value);
+                        break;
+                }
+            }
+            else if (action.Action.Equals(ItemAction.Drop) || action.Action.Equals(ItemAction.Use))
+            {
+                switch (action.Item.type)
+                {
+                    case ItemType.Egg:
+                    case ItemType.Puppy:
+                    case ItemType.Drop:
+                        inventory.Remove(action.Item);
+                        break;
+                    case ItemType.Money:
+                        break;
+                }
+            }
+        }
 
-			knowledge[definition.itemName].Add();
-		}
+        private void AddKnowledge(Item definition)
+        {
+            if (!knowledge.ContainsKey(definition.itemName))
+            {
+                knowledge.Add(definition.itemName, new KnowledgeItemInstance(definition));
+            }
 
-		public bool CanSpendMoney(int amount)
-		{
-			return amount <= MoneyAmount;
-		}
+            knowledge[definition.itemName].Add();
+        }
 
-		public bool SpendMoney(int amount)
-		{
-			if (!CanSpendMoney(amount))
-			{
-				return false;
-			}
+        public bool CanSpendMoney(int amount)
+        {
+            return amount <= MoneyAmount;
+        }
 
-			AddMoney(-amount);
+        public bool SpendMoney(int amount)
+        {
+            if (!CanSpendMoney(amount))
+            {
+                return false;
+            }
 
-			return true;
-		}
+            AddMoney(-amount);
 
-		public void AddMoney(int amount)
-		{
-			MoneyAmount += amount;
-			OnMoneyAmountChanged?.Invoke(MoneyAmount);
-		}
-	}
+            return true;
+        }
+
+        public void AddMoney(int amount)
+        {
+            MoneyAmount += amount;
+            OnMoneyAmountChanged?.Invoke(MoneyAmount);
+        }
+    }
 }

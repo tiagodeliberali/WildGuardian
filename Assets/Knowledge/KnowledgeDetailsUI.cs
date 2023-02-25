@@ -10,54 +10,54 @@ using UnityEngine.UI;
 
 public class KnowledgeDetailsUI : MonoBehaviour
 {
-	public GameObject details;
+    public GameObject details;
 
-	public Image icon;
-	public TextMeshProUGUI itemName;
-	public TextMeshProUGUI description;
-	public TextMeshProUGUI value;
+    public Image icon;
+    public TextMeshProUGUI itemName;
+    public TextMeshProUGUI description;
+    public TextMeshProUGUI value;
 
 
-	public TextMeshProUGUI incubatorOrFood;
-	public TextMeshProUGUI timeToNext;
-	public TextMeshProUGUI next;
-	
-	public TextMeshProUGUI count;
+    public TextMeshProUGUI incubatorOrFood;
+    public TextMeshProUGUI timeToNext;
+    public TextMeshProUGUI next;
 
-	public void SetActive(bool active)
-	{
-		details.SetActive(active);
-	}
+    public TextMeshProUGUI count;
 
-	public void SelectItem(KnowledgeItemInstance instance)
-	{
-		var definition = instance.Definition;
+    public void SetActive(bool active)
+    {
+        details.SetActive(active);
+    }
 
-		icon.sprite = definition.icon;
-		itemName.text = definition.itemName;
-		description.text = definition.description;
-		value.text = $"$ {definition.value}";
+    public void SelectItem(KnowledgeItemInstance instance)
+    {
+        var definition = instance.Definition;
 
-		bool isAnimal = new ItemType[] { ItemType.Egg, ItemType.Puppy }.Contains(instance.Definition.type);
+        icon.sprite = definition.icon;
+        itemName.text = definition.itemName;
+        description.text = definition.description;
+        value.text = $"$ {definition.value}";
 
-		if (isAnimal)
-		{
-			var animal = instance.Definition as Animal;
+        bool isAnimal = new ItemType[] { ItemType.Egg, ItemType.Puppy }.Contains(instance.Definition.type);
 
-			incubatorOrFood.text = instance.Definition.type.Equals(ItemType.Egg) 
-				? animal.GetIncubator() 
-				: animal.GetFood();
+        if (isAnimal)
+        {
+            var animal = instance.Definition as Animal;
 
-			timeToNext.text = $"{animal.timeToNext} dias";
-			next.text = animal.next.itemName;
-		}
+            incubatorOrFood.text = instance.Definition.type.Equals(ItemType.Egg)
+                ? animal.GetIncubator()
+                : animal.GetFood();
 
-		incubatorOrFood.transform.parent.gameObject.SetActive(isAnimal);
-		timeToNext.transform.parent.gameObject.SetActive(isAnimal);
-		next.transform.parent.gameObject.SetActive(isAnimal);
+            timeToNext.text = $"{animal.timeToNext} dias";
+            next.text = animal.next.itemName;
+        }
 
-		count.text = $"{instance.Count}";
+        incubatorOrFood.transform.parent.gameObject.SetActive(isAnimal);
+        timeToNext.transform.parent.gameObject.SetActive(isAnimal);
+        next.transform.parent.gameObject.SetActive(isAnimal);
 
-		details.SetActive(true);
-	}
+        count.text = $"{instance.Count}";
+
+        details.SetActive(true);
+    }
 }

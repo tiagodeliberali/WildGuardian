@@ -23,7 +23,7 @@ public class IncubatorItem : MonoBehaviour
         this.timeManager = timeManager;
 
         TotalDays = animal.timeToNext;
-        
+
         timeManager.OnDayChanged += TimeManager_OnDayChanged;
         timeManager.OnHourChanged += TimeManager_OnDayChanged;
     }
@@ -40,7 +40,7 @@ public class IncubatorItem : MonoBehaviour
 
             icon.sprite = next.icon;
             transform.localScale = new Vector3(0.4f, 0.4f, 1);
-            
+
             if (next is Animal nextAnimal)
             {
                 animal = nextAnimal;
