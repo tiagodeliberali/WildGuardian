@@ -17,6 +17,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 0e123cfdc54a3ca4684816a34167a566, type: 3}
   description: Um dragonete pato que parece ter a pele feita de metal
   value: 250
-  timeToNext: 15
+  timeToNext: 5
   next: {fileID: 11400000, guid: 8807258d328d49d40b6c8d4457414643, type: 2}
   animalType: 0

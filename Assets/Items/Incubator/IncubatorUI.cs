@@ -14,10 +14,13 @@ using Zenject;
 public class IncubatorUI : MonoBehaviour, IAssociateInventory
 {
 	// Used to instantiate items UI on the inventory
-	public Transform ItemPlaceholder;
+	public Transform InventoryItemPlaceholder;
 	public GameObject InventoryItem;
 
-	public int MaxNumberOfEggs = 2;
+    public Transform ItemPlaceholder;
+    public GameObject Item;
+
+    public int MaxNumberOfEggs = 1;
 
 	private InventoryUI inventoryUI;
 	private TimeManager timeManager;
@@ -48,19 +51,23 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
 			return false;
 		}
 
-		GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
+		GameObject inventoryObject = Instantiate(InventoryItem, InventoryItemPlaceholder);
 
-		var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+		var itemIcon = inventoryObject.transform.Find("ItemIcon").GetComponent<Image>();
 		itemIcon.sprite = instance.Definition.icon;
 
-		var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+		var itemName = inventoryObject.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
 		itemName.text = instance.Definition.itemName;
 
-		var controller = obj.GetComponent<IncubatorItemUI>();
-		controller.Associate(instance.Definition, timeManager, this);
-		items.Add(controller);
+		var inventoryItemController = inventoryObject.GetComponent<IncubatorItemUI>();
+		inventoryItemController.Associate(instance.Definition, timeManager, this);
+		items.Add(inventoryItemController);
 
-		return true;
+        GameObject obj = Instantiate(Item, ItemPlaceholder);
+        var itemController = obj.GetComponent<IncubatorItem>();
+        itemController.Associate(instance.Definition, timeManager);
+
+        return true;
 	}
 
 	public ItemType GetItemType()

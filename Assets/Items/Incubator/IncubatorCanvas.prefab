@@ -110,7 +110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2541794125082746670
 RectTransform:
   m_ObjectHideFlags: 0
@@ -206,8 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28405325fb4fd6c4db129139670362eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemPlaceholder: {fileID: 2541794126309607653}
+  InventoryItemPlaceholder: {fileID: 2541794126309607653}
   InventoryItem: {fileID: 5185858648756007468, guid: 8520e86ddaee67e4c98bf4577fade2f4, type: 3}
+  ItemPlaceholder: {fileID: 0}
+  Item: {fileID: 5382309565900598238, guid: a3f6dea17471ab945a9eca7bc390df30, type: 3}
+  MaxNumberOfEggs: 2
 --- !u!1 &2541794125552938323
 GameObject:
   m_ObjectHideFlags: 0
