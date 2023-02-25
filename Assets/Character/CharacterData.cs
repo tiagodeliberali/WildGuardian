@@ -23,10 +23,10 @@ namespace Assets.Character
 
 		public IReadOnlyDictionary<string, KnowledgeItemInstance> Knowledge => knowledge;
 
-		public IReadOnlyList<ItemInstance> Inventory => inventory;
+		public IReadOnlyList<Item> Inventory => inventory;
 
 		private Dictionary<string, KnowledgeItemInstance> knowledge = new Dictionary<string, KnowledgeItemInstance>();
-		private List<ItemInstance> inventory = new List<ItemInstance>();
+		private List<Item> inventory = new List<Item>();
 		
 		[Inject]
 		public void Contruct(SignalBus signalBus)
@@ -34,31 +34,31 @@ namespace Assets.Character
 			signalBus.Subscribe<ItemActionSignal>(this.OnItemActionHappened);
 		}
 
-		private void OnItemActionHappened(ItemActionSignal item)
+		private void OnItemActionHappened(ItemActionSignal action)
 		{
-			if (item.Action.Equals(ItemAction.Pickup))
+			if (action.Action.Equals(ItemAction.Pickup))
 			{
-				switch (item.Item.Definition.type)
+				switch (action.Item.type)
 				{
 					case ItemType.Puppy:
 					case ItemType.Egg:
 					case ItemType.Drop:
-						AddKnowledge(item.Item.Definition);
-						inventory.Add(item.Item);
+						AddKnowledge(action.Item);
+						inventory.Add(action.Item);
 						break;
 					case ItemType.Money:
-						AddMoney(item.Item.Definition.value);
+						AddMoney(action.Item.value);
 						break;
 				}
 			}
-			else if (item.Action.Equals(ItemAction.Drop) || item.Action.Equals(ItemAction.Use))
+			else if (action.Action.Equals(ItemAction.Drop) || action.Action.Equals(ItemAction.Use))
 			{
-				switch (item.Item.Definition.type)
+				switch (action.Item.type)
 				{
 					case ItemType.Egg:
 					case ItemType.Puppy:
 					case ItemType.Drop:
-						inventory.Remove(item.Item);
+						inventory.Remove(action.Item);
 						break;
 					case ItemType.Money:
 						break;

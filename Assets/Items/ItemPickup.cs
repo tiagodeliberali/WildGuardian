@@ -1,4 +1,3 @@
-using Assets.Items;
 using Assets.Signals;
 
 using UnityEngine;
@@ -8,7 +7,6 @@ using Zenject;
 public class ItemPickup : MonoBehaviour
 {
 	public Item Item;
-	private ItemInstance instance;
 	private SignalBus signalBus;
 
 	[Inject]
@@ -17,14 +15,9 @@ public class ItemPickup : MonoBehaviour
 		this.signalBus = signalBus;
 	}
 
-	private void Awake()
-	{
-		instance = new ItemInstance(Item);
-	}
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		signalBus.Fire(ItemActionSignal.Pickup(instance));
+		signalBus.Fire(ItemActionSignal.Pickup(Item));
 		Destroy(gameObject);
 	}
 }

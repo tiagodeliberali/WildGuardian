@@ -2,7 +2,6 @@ using Assets.GameTime;
 using Assets.Items;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class IncubatorItem : MonoBehaviour
 {

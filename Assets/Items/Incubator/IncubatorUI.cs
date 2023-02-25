@@ -44,7 +44,7 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
 		gameObject.SetActive(false);
 	}
 
-	public bool SelectItem(ItemInstance instance)
+	public bool SelectItem(Item definition)
 	{
 		if (items.Count == MaxNumberOfEggs)
 		{
@@ -54,18 +54,18 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
 		GameObject inventoryObject = Instantiate(InventoryItem, InventoryItemPlaceholder);
 
 		var itemIcon = inventoryObject.transform.Find("ItemIcon").GetComponent<Image>();
-		itemIcon.sprite = instance.Definition.icon;
+		itemIcon.sprite = definition.icon;
 
 		var itemName = inventoryObject.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-		itemName.text = instance.Definition.itemName;
+		itemName.text = definition.itemName;
 
 		var inventoryItemController = inventoryObject.GetComponent<IncubatorItemUI>();
-		inventoryItemController.Associate(instance.Definition, timeManager, this);
+		inventoryItemController.Associate(definition, timeManager, this);
 		items.Add(inventoryItemController);
 
         GameObject obj = Instantiate(Item, ItemPlaceholder);
         var itemController = obj.GetComponent<IncubatorItem>();
-        itemController.Associate(instance.Definition, timeManager);
+        itemController.Associate(definition, timeManager);
 
         return true;
 	}

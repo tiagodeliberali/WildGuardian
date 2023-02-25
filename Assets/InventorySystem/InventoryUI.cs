@@ -101,10 +101,10 @@ public class InventoryUI : MonoBehaviour
 			GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
 
 			var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-			itemIcon.sprite = instance.Definition.icon;
+			itemIcon.sprite = instance.icon;
 
 			var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-			itemName.text = instance.Definition.itemName;
+			itemName.text = instance.itemName;
 
 			var controller = obj.GetComponent<InvetoryItemUI>();
 			controller.Associate(instance, signalBus, association);

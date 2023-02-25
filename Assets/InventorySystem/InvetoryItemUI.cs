@@ -12,7 +12,7 @@ using Zenject;
 /// </summary>
 public class InvetoryItemUI : MonoBehaviour
 {
-	private ItemInstance item;
+	private Item item;
 	private Button itemButtom;
 	private SignalBus signalBus;
 	private IAssociateInventory association;
@@ -43,7 +43,7 @@ public class InvetoryItemUI : MonoBehaviour
 		}
 	}
 
-	public void Associate(ItemInstance item, SignalBus signalBus, IAssociateInventory association)
+	public void Associate(Item item, SignalBus signalBus, IAssociateInventory association)
 	{
 		this.item = item;
 		this.signalBus = signalBus;
@@ -57,7 +57,7 @@ public class InvetoryItemUI : MonoBehaviour
 
 	public void EnableInteractonIfType(ItemType type)
 	{
-		itemButtom.interactable = type == item.Definition.type;
+		itemButtom.interactable = type == item.type;
 	}
 
 	public void EnableInteraction(bool active)
