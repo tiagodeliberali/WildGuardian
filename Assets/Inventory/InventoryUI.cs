@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using Assets;
 using Assets.Character;
 using Assets.InventorySystem;
 using Assets.Items;
@@ -110,15 +111,11 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (var instance in character.Inventory)
         {
-            GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
+            var controller = InventoryItem
+                .GetComponent<IGenerateGameObject>()
+                .Build(ItemPlaceholder, instance)
+                .GetComponent<InvetoryItemUI>();
 
-            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-            itemIcon.sprite = instance.icon;
-
-            var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-            itemName.text = instance.itemName;
-
-            var controller = obj.GetComponent<InvetoryItemUI>();
             controller.Associate(instance, signalBus, association);
             controller.SetRemoveButtonActive(EnableRemove.isOn);
 

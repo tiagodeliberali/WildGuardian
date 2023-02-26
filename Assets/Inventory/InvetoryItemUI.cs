@@ -1,6 +1,9 @@
+using Assets;
 using Assets.InventorySystem;
 using Assets.Items;
 using Assets.Signals;
+
+using TMPro;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +13,7 @@ using Zenject;
 /// <summary>
 /// Changes to items are communicated through signal
 /// </summary>
-public class InvetoryItemUI : MonoBehaviour
+public class InvetoryItemUI : MonoBehaviour, IGenerateGameObject
 {
     private Item item;
     private Button itemButtom;
@@ -63,5 +66,25 @@ public class InvetoryItemUI : MonoBehaviour
     public void EnableInteraction(bool active)
     {
         itemButtom.interactable = active;
+    }
+
+    public GameObject Build<T>(Transform placeholder, T instance)
+    {
+        if (instance is Item item)
+        {
+            var obj = Instantiate(this.gameObject, placeholder);
+
+            obj.transform.Find("ItemIcon")
+                    .GetComponent<Image>()
+                    .sprite = item.icon;
+
+            obj.transform.Find("ItemName")
+                .GetComponent<TextMeshProUGUI>()
+                .text = item.itemName;
+
+            return obj;
+        }
+
+        return null;
     }
 }
