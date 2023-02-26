@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using Assets;
 using Assets.Character;
@@ -96,12 +97,9 @@ public class InventoryUI : MonoBehaviour
 
     private void ClearItems()
     {
-        foreach (var item in InventoryItems)
+        foreach (var item in this.GetValidInventoryItems())
         {
-            if (item != null)
-            {
-                item.Remove();
-            }
+            item.Remove();
         }
 
         InventoryItems.Clear();
@@ -125,7 +123,7 @@ public class InventoryUI : MonoBehaviour
 
     public void EnableItemsRemove()
     {
-        foreach (var item in InventoryItems)
+        foreach (var item in this.GetValidInventoryItems())
         {
             item.SetRemoveButtonActive(EnableRemove.isOn);
         }
@@ -133,9 +131,11 @@ public class InventoryUI : MonoBehaviour
 
     private void EnableItemsOfType(ItemType type)
     {
-        foreach (var item in InventoryItems)
+        foreach (var item in this.GetValidInventoryItems())
         {
             item.EnableInteractonIfType(type);
         }
     }
+
+    private IEnumerable<InvetoryItemUI> GetValidInventoryItems() => InventoryItems.Where(x => x != null);
 }
