@@ -64,12 +64,15 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
         inventoryItemController.Associate(definition, timeManager, this);
         items.Add(inventoryItemController);
 
-        GameObject obj = Instantiate(Item, ItemPlaceholder);
+        GameObject incubatorObject = Instantiate(Item, ItemPlaceholder);
 
-        var itemController = obj.GetComponent<IncubatorItem>();
+        var spriteRenderer = incubatorObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = definition.icon;
+
+        var itemController = incubatorObject.GetComponent<IncubatorItem>();
         itemController.Associate(definition, timeManager);
 
-        var itemPickup = obj.GetComponent<ItemPickup>();
+        var itemPickup = incubatorObject.GetComponent<ItemPickup>();
         itemPickup.Associate(definition, this.signalBus);
         itemPickup.Enabled = false;
 

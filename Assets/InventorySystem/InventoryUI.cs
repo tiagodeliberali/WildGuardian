@@ -21,6 +21,7 @@ public class InventoryUI : MonoBehaviour
 
     private SignalBus signalBus;
     private CharacterData character;
+    private PuppyAssociateInventory puppyAssociation;
 
     // Used to instantiate items UI on the inventory
     public Transform ItemPlaceholder;
@@ -33,10 +34,11 @@ public class InventoryUI : MonoBehaviour
     private IAssociateInventory association;
 
     [Inject]
-    public void Contruct(SignalBus signalBus, CharacterData character)
+    public void Contruct(SignalBus signalBus, CharacterData character, PuppyAssociateInventory puppyAssociation)
     {
         this.signalBus = signalBus;
         this.character = character;
+        this.puppyAssociation = puppyAssociation;
 
         signalBus.Subscribe<UISignal>(this.OnUIStateChange);
     }
@@ -52,11 +54,18 @@ public class InventoryUI : MonoBehaviour
     public void OpenWindow(IAssociateInventory association)
     {
         this.association = association;
-        this.OpenWindow();
+        this.LoadWindow();
         this.EnableItemsOfType(association.GetItemType());
     }
 
     public void OpenWindow()
+    {
+        this.association = puppyAssociation;
+        this.LoadWindow();
+        this.EnableItemsOfType(puppyAssociation.GetItemType());
+    }
+
+    private void LoadWindow()
     {
         if (Inventory.activeSelf)
         {

@@ -11,6 +11,8 @@ public class GameInstaller : MonoInstaller
 
     public TimeManager timeManager;
 
+    public PuppyAssociateInventory PuppyAssociateInventory;
+
     public override void InstallBindings()
     {
         SignalBusInstaller.Install(this.Container);
@@ -27,6 +29,9 @@ public class GameInstaller : MonoInstaller
 
         this.Container.Bind<KnowledgeUI>()
             .FromInstance(knowledgeManager);
+
+        this.Container.Bind<PuppyAssociateInventory>()
+            .FromInstance(PuppyAssociateInventory);
 
         this.Container.DeclareSignal<UISignal>();
         this.Container.DeclareSignal<ItemActionSignal>();
