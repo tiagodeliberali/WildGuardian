@@ -36,7 +36,7 @@ public class IncubatorItem : MonoBehaviour
             var next = animal.next;
 
             icon.sprite = next.icon;
-            this.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+            this.transform.localScale = new Vector3(2.5f, 2.5f, 1);
 
             if (next is Animal nextAnimal)
             {
