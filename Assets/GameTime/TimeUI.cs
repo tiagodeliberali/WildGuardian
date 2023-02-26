@@ -8,29 +8,29 @@ using Zenject;
 
 public class TimeUI : MonoBehaviour
 {
-    public TextMeshProUGUI Day;
-    public TextMeshProUGUI Hour;
-
-    private TimeManager timeManager;
+    private TextMeshProUGUI dayText;
+    private TextMeshProUGUI hourText;
 
     [Inject]
     public void Contruct(TimeManager timeManager)
     {
-        this.timeManager = timeManager;
         timeManager.OnDayChanged += this.TimeManager_OnDayChanged;
         timeManager.OnHourChanged += this.TimeManager_OnHourChanged;
 
-        Day.text = $"Dia {timeManager.TimeData.Day}";
-        Hour.text = $"{timeManager.TimeData.Hour}:00";
+        dayText = this.transform.Find("DayText").GetComponent<TextMeshProUGUI>();
+        hourText = this.transform.Find("HourText").GetComponent<TextMeshProUGUI>();
+
+        dayText.text = $"Dia {timeManager.TimeData.Day}";
+        hourText.text = $"{timeManager.TimeData.Hour}:00";
     }
 
     private void TimeManager_OnHourChanged(TimeData time)
     {
-        Hour.text = $"{time.Hour}:00";
+        hourText.text = $"{time.Hour}:00";
     }
 
     private void TimeManager_OnDayChanged(TimeData time)
     {
-        Day.text = $"Dia {time.Day}";
+        dayText.text = $"Dia {time.Day}";
     }
 }

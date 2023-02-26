@@ -8,12 +8,13 @@ using Zenject;
 
 public class MoneyUI : MonoBehaviour
 {
-    public TextMeshProUGUI moneyUI;
+    private TextMeshProUGUI moneyUI;
 
     [Inject]
     public void Contruct(CharacterData character)
     {
         character.OnMoneyAmountChanged += this.OnMoneyAmountChanged;
+        this.moneyUI = this.transform.Find("Value").GetComponent<TextMeshProUGUI>();
     }
 
     private void OnMoneyAmountChanged(int amount) => moneyUI.text = $"$ {amount}";

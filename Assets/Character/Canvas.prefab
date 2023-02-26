@@ -734,6 +734,7 @@ GameObject:
   - component: {fileID: 1671272636}
   - component: {fileID: 1671272635}
   - component: {fileID: 8171998017235353954}
+  - component: {fileID: 282385772}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -813,8 +814,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567093573ae6d5f449b63d4e24839b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Day: {fileID: 3688504957654158820}
-  Hour: {fileID: 7912850834883496589}
+--- !u!114 &282385772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671272633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d041c00b6944a6b4cab5fd0eac16199e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1088148933112221963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,7 +2135,6 @@ GameObject:
   - component: {fileID: 8020864549575981746}
   - component: {fileID: 8020864549575981747}
   - component: {fileID: 4177040697758767522}
-  - component: {fileID: 351879939473351484}
   - component: {fileID: 5632907653998063109}
   - component: {fileID: 4424796015657960494}
   - component: {fileID: 5611956456983645509}
@@ -2239,18 +2249,6 @@ MonoBehaviour:
   InventoryItem: {fileID: 5185858648756007468, guid: 28d25986aec8e7d4587c0708a6e9f181, type: 3}
   Inventory: {fileID: 8020864549982494689}
   EnableRemove: {fileID: 8020864549999012647}
---- !u!114 &351879939473351484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8020864549575981744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d041c00b6944a6b4cab5fd0eac16199e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5632907653998063109
 MonoBehaviour:
   m_ObjectHideFlags: 0
