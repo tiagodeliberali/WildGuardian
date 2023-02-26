@@ -11,6 +11,7 @@ public class IncubatorItem : MonoBehaviour
 
     public int TotalDays;
     public int ElapsedDays;
+    private ItemPickup itemPickup;
 
     private void Start() => this.icon = this.GetComponent<SpriteRenderer>();
 
@@ -21,8 +22,17 @@ public class IncubatorItem : MonoBehaviour
 
         TotalDays = animal.timeToNext;
 
-        timeManager.OnDayChanged += this.TimeManager_OnDayChanged;
-        timeManager.OnHourChanged += this.TimeManager_OnDayChanged;
+        this.timeManager.OnDayChanged += this.TimeManager_OnDayChanged;
+        this.timeManager.OnHourChanged += this.TimeManager_OnDayChanged;
+
+        this.itemPickup = this.GetComponent<ItemPickup>();
+        this.itemPickup.OnItemPickup += this.ItemPickup_OnItemPickup;
+    }
+
+    private void ItemPickup_OnItemPickup(Item Item)
+    {
+        this.timeManager.OnDayChanged -= this.TimeManager_OnDayChanged;
+        this.timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
     }
 
     private void TimeManager_OnDayChanged(TimeData time)
@@ -33,21 +43,23 @@ public class IncubatorItem : MonoBehaviour
         {
             ElapsedDays = 0;
 
-            var next = animal.next;
+            var next = this.animal.next;
+            this.itemPickup.SetItem(next);
+            this.itemPickup.Enabled = true;
 
             icon.sprite = next.icon;
             this.transform.localScale = new Vector3(2.5f, 2.5f, 1);
 
             if (next is Animal nextAnimal)
             {
-                animal = nextAnimal;
-                TotalDays = nextAnimal.timeToNext;
+                this.animal = nextAnimal;
+                this.TotalDays = nextAnimal.timeToNext;
                 this.transform.localPosition += new Vector3(0, -1.5f, 0);
             }
             else
             {
-                timeManager.OnDayChanged -= this.TimeManager_OnDayChanged;
-                timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
+                this.timeManager.OnDayChanged -= this.TimeManager_OnDayChanged;
+                this.timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
             }
         }
     }

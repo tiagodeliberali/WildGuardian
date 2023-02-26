@@ -23,13 +23,15 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
 
     private InventoryUI inventoryUI;
     private TimeManager timeManager;
+    private SignalBus signalBus;
     private List<IncubatorItemUI> items = new List<IncubatorItemUI>();
 
     [Inject]
-    public void Contruct(InventoryUI inventoryUI, TimeManager timeManager)
+    public void Contruct(InventoryUI inventoryUI, TimeManager timeManager, SignalBus signalBus)
     {
         this.inventoryUI = inventoryUI;
         this.timeManager = timeManager;
+        this.signalBus = signalBus;
     }
 
     public void OpenUI()
@@ -63,8 +65,13 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
         items.Add(inventoryItemController);
 
         GameObject obj = Instantiate(Item, ItemPlaceholder);
+
         var itemController = obj.GetComponent<IncubatorItem>();
         itemController.Associate(definition, timeManager);
+
+        var itemPickup = obj.GetComponent<ItemPickup>();
+        itemPickup.Associate(definition, this.signalBus);
+        itemPickup.Enabled = false;
 
         return true;
     }

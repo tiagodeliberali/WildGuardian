@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5382309565900598239}
   - component: {fileID: 5382309565900598237}
   - component: {fileID: 5382309565900598236}
+  - component: {fileID: -8038655519505127125}
+  - component: {fileID: 70512879667949990}
   m_Layer: 0
   m_Name: IncubatorItem
   m_TagString: Untagged
@@ -99,3 +101,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalDays: 0
   ElapsedDays: 0
+--- !u!58 &-8038655519505127125
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382309565900598238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.08
+--- !u!114 &70512879667949990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382309565900598238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afb4adb1d0ffae499edafcb9b99c3cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: {fileID: 0}
+  Enabled: 1
