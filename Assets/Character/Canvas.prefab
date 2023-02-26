@@ -1529,7 +1529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46db7625203659429de413a754dbb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyUI: {fileID: 8020864549283331808}
 --- !u!1 &8020864548833843861
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,7 +2263,7 @@ MonoBehaviour:
   knowledge: {fileID: 1383627873}
   knowledgeDetails: {fileID: 4424796015657960494}
   ItemPlaceholder: {fileID: 4494255711989698056}
-  InventoryItem: {fileID: 3124193658944568725, guid: 74266cc81cc337d419cc16ec6b85ec16, type: 3}
+  KnowledgeItem: {fileID: 3124193658944568725, guid: 74266cc81cc337d419cc16ec6b85ec16, type: 3}
 --- !u!114 &4424796015657960494
 MonoBehaviour:
   m_ObjectHideFlags: 0

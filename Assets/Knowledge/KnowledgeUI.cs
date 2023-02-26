@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using Assets;
 using Assets.Character;
 using Assets.Signals;
 
@@ -18,7 +19,7 @@ public class KnowledgeUI : MonoBehaviour
 
     // Used to instantiate items UI on the inventory
     public Transform ItemPlaceholder;
-    public GameObject InventoryItem;
+    public GameObject KnowledgeItem;
 
     private SignalBus signalBus;
     private CharacterData character;
@@ -68,13 +69,12 @@ public class KnowledgeUI : MonoBehaviour
     {
         foreach (var item in character.Knowledge.Values)
         {
-            GameObject obj = Instantiate(InventoryItem, ItemPlaceholder);
+            var controller = KnowledgeItem
+                .GetComponent<IGenerateGameObject>()
+                .Build(ItemPlaceholder, item)
+                .GetComponent<KnowledgeItemUI>();
 
-            var itemName = obj.transform.Find("Icon").GetComponent<Image>();
-            itemName.sprite = item.Definition.icon;
-
-            var controller = obj.GetComponent<KnowledgeItemUI>();
-            controller.AssociateItem(item, knowledgeDetails);
+            controller.AssociateItem(knowledgeDetails);
 
             knowledgeItems.Add(controller);
         }
