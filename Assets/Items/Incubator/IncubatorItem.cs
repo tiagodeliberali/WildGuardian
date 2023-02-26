@@ -1,9 +1,12 @@
+using Assets;
 using Assets.GameTime;
 using Assets.Items;
 
 using UnityEngine;
 
-public class IncubatorItem : MonoBehaviour
+using Zenject;
+
+public class IncubatorItem : MonoBehaviour, IGenerateGameObject
 {
     private Animal animal;
     private TimeManager timeManager;
@@ -15,9 +18,8 @@ public class IncubatorItem : MonoBehaviour
 
     private void Start() => this.icon = this.GetComponent<SpriteRenderer>();
 
-    internal void Associate(Item definition, TimeManager timeManager)
+    internal void Associate(SignalBus signalBus, TimeManager timeManager, bool enablePicking, Vector3? position = null)
     {
-        this.animal = definition as Animal;
         this.timeManager = timeManager;
 
         TotalDays = animal.timeToNext;
@@ -27,6 +29,13 @@ public class IncubatorItem : MonoBehaviour
 
         this.itemPickup = this.GetComponent<ItemPickup>();
         this.itemPickup.OnItemPickup += this.ItemPickup_OnItemPickup;
+        this.itemPickup.Associate(animal, signalBus);
+        this.itemPickup.Enabled = enablePicking;
+
+        if (position.HasValue)
+        {
+            this.transform.position = position.Value;
+        }
     }
 
     private void ItemPickup_OnItemPickup(Item Item)
@@ -71,5 +80,26 @@ public class IncubatorItem : MonoBehaviour
                 this.timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
             }
         }
+    }
+
+    public GameObject Build<T>(Transform placeholder, T instance)
+    {
+        if (instance is Item definition)
+        {
+            GameObject incubatorObject = Instantiate(this.gameObject, placeholder);
+
+            incubatorObject.GetComponent<SpriteRenderer>().sprite = definition.icon;
+
+            incubatorObject.GetComponent<IncubatorItem>().animal = definition as Animal;
+
+            if (definition.type.Equals(ItemType.Puppy))
+            {
+                incubatorObject.transform.localScale = new Vector3(2.5f, 2.5f, 1);
+            }
+
+            return incubatorObject;
+        }
+
+        return null;
     }
 }

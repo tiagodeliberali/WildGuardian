@@ -1,3 +1,4 @@
+using Assets;
 using Assets.InventorySystem;
 using Assets.Items;
 
@@ -36,19 +37,12 @@ public class PuppyAssociateInventory : MonoBehaviour, IAssociateInventory
 
     public bool SelectItem(Item item)
     {
-        GameObject obj = Instantiate(ItemPrefab, ItemPlaceholder);
-        obj.transform.position = PlayerReference.transform.position + new Vector3(0, -1f, 0);
-        obj.transform.localScale = new Vector3(2.5f, 2.5f, 1);
+        var itemController = this.ItemPrefab
+            .GetComponent<IGenerateGameObject>()
+            .Build(ItemPlaceholder, item)
+            .GetComponent<IncubatorItem>();
 
-        var spriteRenderer = obj.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = item.icon;
-
-        var itemController = obj.GetComponent<IncubatorItem>();
-        itemController.Associate(item, timeManager);
-
-        var itemPickup = obj.GetComponent<ItemPickup>();
-        itemPickup.Associate(item, signalBus);
-        itemPickup.Enabled = false;
+        itemController.Associate(signalBus, timeManager, true, PlayerReference.transform.position + new Vector3(0, -1f, 0));
 
         return true;
     }

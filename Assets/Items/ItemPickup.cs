@@ -1,13 +1,8 @@
-using System;
-
-using Assets.GameTime;
 using Assets.Signals;
 
 using UnityEngine;
 
 using Zenject;
-
-using static UnityEditor.Progress;
 
 public class ItemPickup : MonoBehaviour
 {

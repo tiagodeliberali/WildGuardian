@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 
+using Assets;
 using Assets.InventorySystem;
 using Assets.Items;
 
-using TMPro;
-
 using UnityEngine;
-using UnityEngine.UI;
 
 using Zenject;
 
@@ -52,29 +50,20 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
             return false;
         }
 
-        GameObject inventoryObject = Instantiate(InventoryItem, InventoryItemPlaceholder);
+        var inventoryItemController = InventoryItem
+               .GetComponent<IGenerateGameObject>()
+               .Build(InventoryItemPlaceholder, definition)
+               .GetComponent<IncubatorItemUI>();
 
-        var itemIcon = inventoryObject.transform.Find("ItemIcon").GetComponent<Image>();
-        itemIcon.sprite = definition.icon;
-
-        var itemName = inventoryObject.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-        itemName.text = definition.itemName;
-
-        var inventoryItemController = inventoryObject.GetComponent<IncubatorItemUI>();
-        inventoryItemController.Associate(definition, timeManager, this);
+        inventoryItemController.Associate(timeManager, this);
         items.Add(inventoryItemController);
 
-        GameObject incubatorObject = Instantiate(Item, ItemPlaceholder);
+        var itemController = Item
+            .GetComponent<IGenerateGameObject>()
+            .Build(ItemPlaceholder, definition)
+            .GetComponent<IncubatorItem>();
 
-        var spriteRenderer = incubatorObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = definition.icon;
-
-        var itemController = incubatorObject.GetComponent<IncubatorItem>();
-        itemController.Associate(definition, timeManager);
-
-        var itemPickup = incubatorObject.GetComponent<ItemPickup>();
-        itemPickup.Associate(definition, this.signalBus);
-        itemPickup.Enabled = false;
+        itemController.Associate(signalBus, timeManager, false);
 
         return true;
     }
