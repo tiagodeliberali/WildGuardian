@@ -17,16 +17,16 @@
     {
         public int MoneyAmount { get; private set; }
 
-        public delegate void EventHandler(int amount);
+        public delegate void MoneyEventHandler(int amount);
 
-        public event EventHandler OnMoneyAmountChanged;
+        public event MoneyEventHandler OnMoneyAmountChanged;
 
         public IReadOnlyDictionary<string, KnowledgeItemInstance> Knowledge => knowledge;
 
         public IReadOnlyList<Item> Inventory => inventory;
 
-        private Dictionary<string, KnowledgeItemInstance> knowledge = new Dictionary<string, KnowledgeItemInstance>();
-        private List<Item> inventory = new List<Item>();
+        private Dictionary<string, KnowledgeItemInstance> knowledge = new();
+        private List<Item> inventory = new();
 
         [Inject]
         public void Contruct(SignalBus signalBus)

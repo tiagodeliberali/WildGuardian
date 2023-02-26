@@ -3,6 +3,7 @@ using System.Linq;
 
 using Assets;
 using Assets.GameTime;
+using Assets.Light;
 
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -11,7 +12,7 @@ using Zenject;
 
 public class LightManager : MonoBehaviour
 {
-    public Light2D GlobalLight;
+    private Light2D globalLight;
 
     private List<Light2D> lights;
     private TimeManager timeManager;
@@ -29,9 +30,9 @@ public class LightManager : MonoBehaviour
     private void Awake()
     {
         lights = GameObject.FindGameObjectsWithTag("Light").Select(x => x.GetComponent<Light2D>()).ToList();
+        globalLight = this.GetComponent<Light2D>();
+        this.SetLight(this.timeManager.TimeData);
     }
-
-    private void Start() => this.SetLight(this.timeManager.TimeData);
 
     private void Update()
     {
@@ -40,11 +41,14 @@ public class LightManager : MonoBehaviour
 
             if (!globalLightIntensity.IsCompleted())
             {
-                GlobalLight.intensity = globalLightIntensity.GetValue();
+                globalLight.intensity = globalLightIntensity.GetValue();
                 lights.ForEach(x => x.intensity = lightsIntensity.GetValue());
             }
             else
             {
+                globalLight.intensity = globalLightIntensity.GetValue();
+                lights.ForEach(x => x.intensity = lightsIntensity.GetValue());
+
                 globalLightIntensity = null;
                 lightsIntensity = null;
             }
@@ -78,7 +82,7 @@ public class LightManager : MonoBehaviour
                 break;
         }
 
-        globalLightIntensity = new LerpTime(GlobalLight.intensity, nextGlobalIntensity);
+        globalLightIntensity = new LerpTime(globalLight.intensity, nextGlobalIntensity);
         lightsIntensity = new LerpTime(lights.First().intensity, nextLightsIntensity);
     }
 }

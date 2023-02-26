@@ -35,6 +35,14 @@ public class IncubatorItem : MonoBehaviour
         this.timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
     }
 
+    private void Update()
+    {
+        if (this.animal != null && this.animal.type.Equals(ItemType.Puppy)) 
+        {
+            this.transform.position += new Vector3(0.01f, 0f, 0);
+        }
+    }
+
     private void TimeManager_OnDayChanged(TimeData time)
     {
         ElapsedDays++;
@@ -58,6 +66,7 @@ public class IncubatorItem : MonoBehaviour
             }
             else
             {
+                this.animal = null;
                 this.timeManager.OnDayChanged -= this.TimeManager_OnDayChanged;
                 this.timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
             }

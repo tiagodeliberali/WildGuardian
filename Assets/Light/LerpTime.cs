@@ -1,4 +1,4 @@
-﻿namespace Assets.GameTime
+﻿namespace Assets.Light
 {
     using System;
 
