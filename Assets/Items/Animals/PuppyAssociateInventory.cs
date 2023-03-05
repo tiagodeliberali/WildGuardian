@@ -1,3 +1,5 @@
+using System;
+
 using Assets;
 using Assets.InventorySystem;
 using Assets.Items;
@@ -45,5 +47,10 @@ public class PuppyAssociateInventory : MonoBehaviour, IAssociateInventory
         itemController.Associate(signalBus, timeManager, true, PlayerReference.transform.position + new Vector3(0, -1f, 0));
 
         return true;
+    }
+
+    public void AssociateCloseCall(Action closeWindow)
+    {
+        // do nothing
     }
 }

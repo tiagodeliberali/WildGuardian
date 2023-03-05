@@ -55,6 +55,8 @@ public class InventoryUI : MonoBehaviour
 
     public void OpenWindow(IAssociateInventory association)
     {
+        association.AssociateCloseCall(this.CloseWindow);
+
         this.association = association;
         this.LoadWindow();
         this.EnableItemsOfType(association.GetItemType());
@@ -87,11 +89,7 @@ public class InventoryUI : MonoBehaviour
         signalBus.Fire(UISignal.Closed());
         this.ClearItems();
 
-        if (association != null)
-        {
-            association.CloseWindow();
-        }
-
+        association?.CloseWindow();
         association = null;
     }
 

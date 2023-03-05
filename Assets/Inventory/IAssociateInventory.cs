@@ -1,5 +1,7 @@
 ﻿namespace Assets.InventorySystem
 {
+    using System;
+
     using Assets.Items;
 
     public interface IAssociateInventory
@@ -8,5 +10,6 @@
         bool SelectItem(Item item);
         ItemType GetItemType();
 
+        void AssociateCloseCall(Action closeWindow);
     }
 }

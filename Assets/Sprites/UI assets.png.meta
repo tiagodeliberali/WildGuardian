@@ -419,6 +419,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI assets_15
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 141
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f2988df369df414e865edb620a4327b
+      internalID: -293368416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -437,6 +458,7 @@ TextureImporter:
       UI assets_12: -1877784278
       UI assets_13: 2039691976
       UI assets_14: 840660792
+      UI assets_15: -293368416
       UI assets_2: -1457539756
       UI assets_3: 1861409422
       UI assets_4: 1232896012

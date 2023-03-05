@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Assets;
@@ -23,6 +24,7 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
     private TimeManager timeManager;
     private SignalBus signalBus;
     private List<IncubatorItemUI> items = new List<IncubatorItemUI>();
+    private Action closeInventoryUI;
 
     [Inject]
     public void Contruct(InventoryUI inventoryUI, TimeManager timeManager, SignalBus signalBus)
@@ -41,6 +43,11 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
     public void CloseWindow()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void CloseButtonClick()
+    {
+        this.closeInventoryUI();
     }
 
     public bool SelectItem(Item definition)
@@ -76,5 +83,10 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
     internal void Remove(IncubatorItemUI incubatorItemUI)
     {
         items.Remove(incubatorItemUI);
+    }
+
+    public void AssociateCloseCall(Action closeWindow)
+    {
+        this.closeInventoryUI = closeWindow;
     }
 }
