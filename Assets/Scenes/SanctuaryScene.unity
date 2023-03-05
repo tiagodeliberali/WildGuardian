@@ -261,10 +261,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7894145179093288199, guid: 3d3d6514df41f0341bec0a5ce709de6f, type: 3}
-      propertyPath: m_Intensity
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d3d6514df41f0341bec0a5ce709de6f, type: 3}
 --- !u!4 &202729294 stripped
@@ -13596,6 +13592,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Incubator
       objectReference: {fileID: 0}
+    - target: {fileID: 806258296106282207, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 806258296106282207, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
 --- !u!1001 &2541794124557108459
@@ -13605,29 +13609,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2541794125082746664, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2541794125082746664, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 320
-      objectReference: {fileID: 0}
-    - target: {fileID: 2541794125082746664, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 2541794125082746664, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_ReferencePixelsPerUnit
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 2541794125082746666, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
       propertyPath: m_Name
       value: IncubatorCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 2541794125082746666, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2541794125082746670, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
       propertyPath: m_Pivot.x
@@ -13713,18 +13697,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2541794125552938322, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 2541794125552938322, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2541794125552938322, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 203
-      objectReference: {fileID: 0}
     - target: {fileID: 5891148621034792567, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
       propertyPath: ItemPlaceholder
       value: 
@@ -13738,14 +13710,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1383627876, guid: 9641e4727527969418acb0761174b0ab, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 840660792, guid: a427799dbb6979942ac62d87d5a404cf, type: 3}
-    - target: {fileID: 4494255711989698056, guid: 9641e4727527969418acb0761174b0ab, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5611956456983645509, guid: 9641e4727527969418acb0761174b0ab, type: 3}
       propertyPath: ItemPlaceholder
       value: 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c291b21cd6c19ea448427f67f0f4a256, type: 3}
   m_Name: DuckEgg
   m_EditorClassIdentifier: 
-  itemName: Ovo de pato
+  itemName: Pato
   type: 0
   icon: {fileID: -1045336378, guid: d68315410da10e5448262cc40c3a2957, type: 3}
   description: "Um bel\xEDssimo ovo de dragonete pato!"
