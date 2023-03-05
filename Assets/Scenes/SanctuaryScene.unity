@@ -13546,11 +13546,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806258296106282201, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.16
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 806258296106282201, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.78
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 806258296106282201, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13604,6 +13604,10 @@ PrefabInstance:
     - target: {fileID: 2541794125082746666, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
       propertyPath: m_Name
       value: IncubatorCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541794125082746666, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2541794125082746670, guid: 503a25e47485f684eb6c917a6fc314be, type: 3}
       propertyPath: m_Pivot.x
@@ -13796,6 +13800,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8020864549575981748, guid: 9641e4727527969418acb0761174b0ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020864549982494689, guid: 9641e4727527969418acb0761174b0ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020864550544249660, guid: 9641e4727527969418acb0761174b0ab, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
