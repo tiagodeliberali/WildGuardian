@@ -13592,14 +13592,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Incubator
       objectReference: {fileID: 0}
-    - target: {fileID: 806258296106282207, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
-      propertyPath: m_Size.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 806258296106282207, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
-      propertyPath: m_Size.y
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b988f1d950f3cc459b04a6d964e3779, type: 3}
 --- !u!1001 &2541794124557108459
