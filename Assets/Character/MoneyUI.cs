@@ -14,7 +14,7 @@ public class MoneyUI : MonoBehaviour
     public void Contruct(CharacterData character)
     {
         character.OnMoneyAmountChanged += this.OnMoneyAmountChanged;
-        this.moneyUI = this.transform.Find("Value").GetComponent<TextMeshProUGUI>();
+        this.moneyUI = this.transform.Find("MoneyText").GetComponent<TextMeshProUGUI>();
     }
 
     private void OnMoneyAmountChanged(int amount) => moneyUI.text = $"$ {amount}";
