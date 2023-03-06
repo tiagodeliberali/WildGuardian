@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Pato
   type: 1
-  icon: {fileID: 21300000, guid: e19d9ca608e937e4488db200ae8ea5a0, type: 3}
+  icon: {fileID: 1039759589, guid: e82908802c2ce3442b4f9d21a78710f7, type: 3}
   description: Um dragonete pato que parece ter a pele feita de metal
   value: 250
   timeToNext: 5

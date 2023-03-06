@@ -65,7 +65,6 @@ public class IncubatorItem : MonoBehaviour, IGenerateGameObject
             this.itemPickup.Enabled = true;
 
             icon.sprite = next.icon;
-            this.transform.localScale = new Vector3(2.5f, 2.5f, 1);
 
             if (next is Animal nextAnimal)
             {
@@ -87,15 +86,8 @@ public class IncubatorItem : MonoBehaviour, IGenerateGameObject
         if (instance is Item definition)
         {
             GameObject incubatorObject = Instantiate(this.gameObject, placeholder);
-
             incubatorObject.GetComponent<SpriteRenderer>().sprite = definition.icon;
-
             incubatorObject.GetComponent<IncubatorItem>().animal = definition as Animal;
-
-            if (definition.type.Equals(ItemType.Puppy))
-            {
-                incubatorObject.transform.localScale = new Vector3(2.5f, 2.5f, 1);
-            }
 
             return incubatorObject;
         }
