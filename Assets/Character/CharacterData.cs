@@ -51,6 +51,20 @@
                         break;
                 }
             }
+            else if (action.Action.Equals(ItemAction.Sell))
+            {
+                switch (action.Item.type)
+                {
+                    case ItemType.Puppy:
+                    case ItemType.Egg:
+                    case ItemType.Drop:
+                        inventory.Remove(action.Item);
+                        this.AddMoney(action.Item.value);
+                        break;
+                    case ItemType.Money:
+                        break;
+                }
+            }
             else if (action.Action.Equals(ItemAction.Drop) || action.Action.Equals(ItemAction.Use))
             {
                 switch (action.Item.type)

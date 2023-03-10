@@ -13,6 +13,10 @@ public class GameInstaller : MonoInstaller
 
     public PuppyAssociateInventory PuppyAssociateInventory;
 
+    public ShopSprite shopSrpite;
+
+    public ShopUI shopUI;
+
     public override void InstallBindings()
     {
         SignalBusInstaller.Install(this.Container);
@@ -32,6 +36,12 @@ public class GameInstaller : MonoInstaller
 
         this.Container.Bind<PuppyAssociateInventory>()
             .FromInstance(PuppyAssociateInventory);
+
+        this.Container.Bind<ShopSprite>()
+            .FromInstance(shopSrpite);
+
+        this.Container.Bind<ShopUI>()
+            .FromInstance(shopUI);
 
         this.Container.DeclareSignal<UISignal>();
         this.Container.DeclareSignal<ItemActionSignal>();

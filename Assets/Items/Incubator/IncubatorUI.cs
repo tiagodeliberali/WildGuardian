@@ -40,15 +40,9 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
         inventoryUI.OpenWindow(this);
     }
 
-    public void CloseWindow()
-    {
-        this.gameObject.SetActive(false);
-    }
+    public void CloseWindow() => this.gameObject.SetActive(false);
 
-    public void CloseButtonClick()
-    {
-        this.closeInventoryUI();
-    }
+    public void CloseButtonClick() => this.closeInventoryUI();
 
     public bool SelectItem(Item definition)
     {
@@ -75,18 +69,9 @@ public class IncubatorUI : MonoBehaviour, IAssociateInventory
         return true;
     }
 
-    public ItemType GetItemType()
-    {
-        return ItemType.Egg;
-    }
+    public ItemType GetItemType() => ItemType.Egg;
 
-    internal void Remove(IncubatorItemUI incubatorItemUI)
-    {
-        items.Remove(incubatorItemUI);
-    }
+    internal void Remove(IncubatorItemUI incubatorItemUI) => items.Remove(incubatorItemUI);
 
-    public void AssociateCloseCall(Action closeWindow)
-    {
-        this.closeInventoryUI = closeWindow;
-    }
+    public void AssociateCloseCall(Action closeWindow) => this.closeInventoryUI = closeWindow;
 }
