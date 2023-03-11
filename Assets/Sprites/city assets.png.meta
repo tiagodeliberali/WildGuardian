@@ -239,7 +239,7 @@ TextureImporter:
         width: 58
         height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,6 +247,27 @@ TextureImporter:
       bones: []
       spriteID: 6ae437f6367f9474d85f2479b5320383
       internalID: -200751089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city assets_light_off
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 40
+        width: 10
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4984bbb552678814ea6c1a5f660310a9
+      internalID: -1704404287
       vertices: []
       indices: 
       edges: []
@@ -265,6 +286,7 @@ TextureImporter:
       city assets_chair: -1035622263
       city assets_left: 1187172539
       city assets_light: -657968022
+      city assets_light_off: -1704404287
       city assets_right: -790168944
       city assets_shop1: 1573858237
       city assets_shop_top: -200751089
