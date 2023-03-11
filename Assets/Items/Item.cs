@@ -10,4 +10,5 @@ public class Item : ScriptableObject
     public Sprite icon;
     public string description;
     public int value;
+    public RuntimeAnimatorController animatorController;
 }

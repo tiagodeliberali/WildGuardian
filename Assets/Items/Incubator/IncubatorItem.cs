@@ -11,12 +11,15 @@ public class IncubatorItem : MonoBehaviour, IGenerateGameObject
     private Animal animal;
     private TimeManager timeManager;
     private SpriteRenderer icon;
-
+    
     public int TotalDays;
     public int ElapsedDays;
     private ItemPickup itemPickup;
 
-    private void Start() => this.icon = this.GetComponent<SpriteRenderer>();
+    private void Start()
+    {
+        this.icon = this.GetComponent<SpriteRenderer>();
+    }
 
     internal void Associate(SignalBus signalBus, TimeManager timeManager, bool enablePicking, Vector3? position = null)
     {
@@ -31,6 +34,19 @@ public class IncubatorItem : MonoBehaviour, IGenerateGameObject
         this.itemPickup.OnItemPickup += this.ItemPickup_OnItemPickup;
         this.itemPickup.Associate(animal, signalBus);
         this.itemPickup.Enabled = enablePicking;
+
+        if (this.animal != null)
+        {
+            switch (this.animal.type)
+            {
+                case ItemType.Egg:
+                    this.GetComponent<Animator>().SetBool("IsHatching", true);
+                    break;
+                case ItemType.Puppy:
+                    this.GetComponent<Animator>().SetBool("IsWalking", true);
+                    break;
+            }
+        }
 
         if (position.HasValue)
         {
@@ -48,7 +64,7 @@ public class IncubatorItem : MonoBehaviour, IGenerateGameObject
     {
         if (this.animal != null && this.animal.type.Equals(ItemType.Puppy)) 
         {
-            this.transform.position += new Vector3(0.01f, 0f, 0);
+            this.transform.position += new Vector3(0.005f, 0f, 0);
         }
     }
 
@@ -71,10 +87,16 @@ public class IncubatorItem : MonoBehaviour, IGenerateGameObject
                 this.animal = nextAnimal;
                 this.TotalDays = nextAnimal.timeToNext;
                 this.transform.localPosition += new Vector3(0, -1.5f, 0);
+
+                var animator = this.GetComponent<Animator>();
+                animator.runtimeAnimatorController = nextAnimal.animatorController;
+                animator.SetBool("IsWalking", true);
             }
             else
             {
                 this.animal = null;
+                this.GetComponent<Animator>().runtimeAnimatorController = next.animatorController;
+
                 this.timeManager.OnDayChanged -= this.TimeManager_OnDayChanged;
                 this.timeManager.OnHourChanged -= this.TimeManager_OnDayChanged;
             }
@@ -87,7 +109,12 @@ public class IncubatorItem : MonoBehaviour, IGenerateGameObject
         {
             GameObject incubatorObject = Instantiate(this.gameObject, placeholder);
             incubatorObject.GetComponent<SpriteRenderer>().sprite = definition.icon;
-            incubatorObject.GetComponent<IncubatorItem>().animal = definition as Animal;
+
+            if (instance is Animal animal)
+            {
+                incubatorObject.GetComponent<IncubatorItem>().animal = animal;
+                incubatorObject.GetComponent<Animator>().runtimeAnimatorController = animal.animatorController;
+            }
 
             return incubatorObject;
         }
