@@ -23,6 +23,8 @@ public class InventoryUI : MonoBehaviour
 
     private SignalBus signalBus;
     private CharacterData character;
+    private List<Item> externalInventory;
+
     private PuppyAssociateInventory puppyAssociation;
 
     // Used to instantiate items UI on the inventory
@@ -53,19 +55,42 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void OpenWindow(IAssociateInventory association)
+    public void OpenWindow(IAssociateInventory association, bool loadItems = true)
     {
         association.AssociateCloseCall(this.CloseWindow);
 
         this.association = association;
+        this.externalInventory = null;
+
         this.LoadWindow();
+
+        if (loadItems)
+        {
+            this.LoadItems();
+            this.EnableItemsOfType(association.GetItemType());
+        }
+    }
+
+    public void SetExternalInventory(List<Item> externalInventory)
+    {
+        this.externalInventory = externalInventory;
+        this.LoadItems();
+        this.EnableItemsOfType(association.GetItemType());
+    }
+
+    public void ClearExternalInventory()
+    {
+        this.externalInventory = null;
+        this.LoadItems();
         this.EnableItemsOfType(association.GetItemType());
     }
 
     public void OpenWindow()
     {
         this.association = puppyAssociation;
+        this.externalInventory = null;
         this.LoadWindow();
+        this.LoadItems();
         this.EnableItemsOfType(puppyAssociation.GetItemType());
     }
 
@@ -80,7 +105,6 @@ public class InventoryUI : MonoBehaviour
         signalBus.Fire(UISignal.Opened());
 
         Inventory.SetActive(true);
-        this.LoadItems();
     }
 
     public void CloseWindow()
@@ -105,7 +129,8 @@ public class InventoryUI : MonoBehaviour
 
     private void LoadItems()
     {
-        foreach (var instance in character.Inventory)
+        this.ClearItems();
+        foreach (var instance in this.GetInventoryToShow())
         {
             var controller = InventoryItem
                 .GetComponent<IGenerateGameObject>()
@@ -117,6 +142,13 @@ public class InventoryUI : MonoBehaviour
 
             InventoryItems.Add(controller);
         }
+    }
+
+    private IReadOnlyList<Item> GetInventoryToShow()
+    {
+        return externalInventory == null
+            ? character.Inventory
+            : externalInventory;
     }
 
     public void EnableItemsRemove()

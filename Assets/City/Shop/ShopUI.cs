@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 
+using Assets.Character;
 using Assets.InventorySystem;
 using Assets.Items;
 using Assets.Signals;
@@ -15,8 +17,14 @@ public class ShopUI : MonoBehaviour, IAssociateInventory
 {
     private Action closeInventoryUI;
     private InventoryUI inventoryUI;
+    private CharacterData character;
     private SignalBus signalBus;
     private Item item;
+
+    private List<Item> shopInventory;
+    private float buyFactor;
+    private float sellFactor;
+    private bool isShopBuyingItems;
 
     public Button ConfirmSellButton;
     public TextMeshProUGUI Value;
@@ -24,26 +32,66 @@ public class ShopUI : MonoBehaviour, IAssociateInventory
 
 
     [Inject]
-    public void Contruct(InventoryUI inventoryUI,  SignalBus signalBus)
+    public void Contruct(InventoryUI inventoryUI, SignalBus signalBus, CharacterData character)
     {
         this.inventoryUI = inventoryUI;
         this.signalBus = signalBus;
+        this.character = character;
     }
 
-    public void OpenUI()
+    public void OpenUI(List<Item> shopInventory, float buyFactor, float sellFactor)
     {
         this.gameObject.SetActive(true);
-        inventoryUI.OpenWindow(this);
+        inventoryUI.OpenWindow(this, false);
+        this.inventoryUI.ClearExternalInventory();
 
+        this.ResetDetails();
+
+        this.shopInventory = shopInventory;
+        this.buyFactor = buyFactor;
+        this.sellFactor = sellFactor;
+        this.isShopBuyingItems = true;
+    }
+
+    private void ResetDetails()
+    {
         ConfirmSellButton.interactable = false;
         Value.text = string.Empty;
     }
 
     public void CloseButtonClick() => this.closeInventoryUI();
 
-    public void ConfirmSell()
+    public void SetShopToSellItemsUI()
     {
-        this.signalBus.Fire(ItemActionSignal.Sell(this.item));
+        this.ResetDetails();
+        this.isShopBuyingItems = false;
+        this.inventoryUI.SetExternalInventory(this.shopInventory);
+    }
+
+    public void SetShopToBuyItemsUI()
+    {
+        this.ResetDetails();
+        this.isShopBuyingItems = true;
+        this.inventoryUI.ClearExternalInventory();
+    }
+
+    public void ConfirmTransaction()
+    {
+        var price = this.GetItemPrice(item);
+
+        if (this.isShopBuyingItems)
+        {
+            this.signalBus.Fire(ItemActionSignal.Sell(this.item));
+            this.character.AddMoney(price);
+            this.shopInventory.Add(item);
+        }
+        else
+        {
+            this.signalBus.Fire(ItemActionSignal.Pickup(this.item));
+            this.character.SpendMoney(price);
+            this.shopInventory.Remove(item);
+        }
+
         this.closeInventoryUI();
     }
 
@@ -56,10 +104,18 @@ public class ShopUI : MonoBehaviour, IAssociateInventory
     public bool SelectItem(Item item)
     {
         this.item = item;
+        var price = this.GetItemPrice(item);
 
-        ConfirmSellButton.interactable = true;
-        Value.text = $"$ {item.value}";
+        ConfirmSellButton.interactable = this.isShopBuyingItems || this.character.CanSpendMoney(price);
+
+        Value.text = $"$ {price}";
 
         return false;
+    }
+
+    private int GetItemPrice(Item item)
+    {
+        var priceAdjustment = this.isShopBuyingItems ? this.buyFactor : this.sellFactor;
+        return (int) Math.Floor(item.value * priceAdjustment);
     }
 }

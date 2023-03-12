@@ -23,7 +23,7 @@ public class InvetoryItemUI : MonoBehaviour, IGenerateGameObject
 
     private void Awake()
     {
-        itemButtom = this.gameObject.GetComponent<Button>();
+        itemButtom = this.GetComponent<Button>();
     }
 
     public void Remove()
@@ -51,6 +51,8 @@ public class InvetoryItemUI : MonoBehaviour, IGenerateGameObject
         this.item = item;
         this.signalBus = signalBus;
         this.association = association;
+
+        itemButtom = this.GetComponent<Button>();
     }
 
     public void SetRemoveButtonActive(bool active)
