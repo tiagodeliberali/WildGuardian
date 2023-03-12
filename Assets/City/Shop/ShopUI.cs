@@ -24,6 +24,7 @@ public class ShopUI : MonoBehaviour, IAssociateInventory
     private List<Item> shopInventory;
     private float buyFactor;
     private float sellFactor;
+    private ItemType itemType;
     private bool isShopBuyingItems;
 
     public Button ConfirmSellButton;
@@ -39,18 +40,19 @@ public class ShopUI : MonoBehaviour, IAssociateInventory
         this.character = character;
     }
 
-    public void OpenUI(List<Item> shopInventory, float buyFactor, float sellFactor)
+    public void OpenUI(List<Item> shopInventory, float buyFactor, float sellFactor, ItemType itemType)
     {
+        this.shopInventory = shopInventory;
+        this.buyFactor = buyFactor;
+        this.sellFactor = sellFactor;
+        this.itemType = itemType;
+        this.isShopBuyingItems = true;
+
         this.gameObject.SetActive(true);
         inventoryUI.OpenWindow(this, false);
         this.inventoryUI.ClearExternalInventory();
 
         this.ResetDetails();
-
-        this.shopInventory = shopInventory;
-        this.buyFactor = buyFactor;
-        this.sellFactor = sellFactor;
-        this.isShopBuyingItems = true;
     }
 
     private void ResetDetails()
@@ -99,7 +101,7 @@ public class ShopUI : MonoBehaviour, IAssociateInventory
 
     public void CloseWindow() => this.gameObject.SetActive(false);
 
-    public ItemType GetItemType() => ItemType.Egg;
+    public ItemType GetItemType() => this.itemType;
 
     public bool SelectItem(Item item)
     {

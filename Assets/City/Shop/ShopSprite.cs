@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using Assets.Items;
+
 using UnityEngine;
 
 using Zenject;
@@ -13,6 +15,8 @@ public class ShopSprite : MonoBehaviour
 
     public float SellFactor = 2f;
 
+    public ItemType ItemType;
+
     [Inject]
     public void Contruct(ShopUI shopUI)
     {
@@ -21,6 +25,6 @@ public class ShopSprite : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        shopUI.OpenUI(this.shopInventory, BuyFactor, SellFactor);
+        shopUI.OpenUI(this.shopInventory, BuyFactor, SellFactor, ItemType);
     }
 }

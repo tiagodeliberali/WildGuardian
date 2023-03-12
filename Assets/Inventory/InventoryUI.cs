@@ -7,8 +7,6 @@ using Assets.InventorySystem;
 using Assets.Items;
 using Assets.Signals;
 
-using TMPro;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,12 +55,12 @@ public class InventoryUI : MonoBehaviour
 
     public void OpenWindow(IAssociateInventory association, bool loadItems = true)
     {
+        this.LoadWindow();
+
         association.AssociateCloseCall(this.CloseWindow);
 
         this.association = association;
         this.externalInventory = null;
-
-        this.LoadWindow();
 
         if (loadItems)
         {
@@ -87,9 +85,11 @@ public class InventoryUI : MonoBehaviour
 
     public void OpenWindow()
     {
+        this.LoadWindow();
+
         this.association = puppyAssociation;
         this.externalInventory = null;
-        this.LoadWindow();
+        
         this.LoadItems();
         this.EnableItemsOfType(puppyAssociation.GetItemType());
     }
