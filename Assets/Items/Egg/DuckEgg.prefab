@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 762686364865463875}
   - component: {fileID: 762686364865463873}
   - component: {fileID: 5851621632940598990}
-  - component: {fileID: 1095534965741122797}
   - component: {fileID: 7375626461849943476}
   m_Layer: 0
   m_Name: DuckEgg
@@ -139,18 +138,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1095534965741122797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762686364865463879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85fca615fd20050499fb693006ba8514, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7375626461849943476
 MonoBehaviour:
   m_ObjectHideFlags: 0
