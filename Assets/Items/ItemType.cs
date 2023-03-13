@@ -5,6 +5,7 @@
         Egg,
         Puppy,
         Drop,
-        Money
+        Money,
+        All
     }
 }

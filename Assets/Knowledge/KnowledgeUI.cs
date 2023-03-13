@@ -1,33 +1,32 @@
-using System.Collections.Generic;
+using System;
+using System.Linq;
 
-using Assets;
 using Assets.Character;
+using Assets.InventorySystem;
+using Assets.Items;
 using Assets.Signals;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 using Zenject;
 
 /// <summary>
 /// Load data from CharacterData
 /// </summary>
-public class KnowledgeUI : MonoBehaviour
+public class KnowledgeUI : MonoBehaviour, IAssociateInventory
 {
     public GameObject knowledge;
     public KnowledgeDetailsUI knowledgeDetails;
 
-    // Used to instantiate items UI on the inventory
-    public Transform ItemPlaceholder;
-    public GameObject KnowledgeItem;
-
+    private InventoryUI inventoryUI;
     private SignalBus signalBus;
     private CharacterData character;
-    private List<KnowledgeItemUI> knowledgeItems = new List<KnowledgeItemUI>();
+    private Action closeInventoryUI;
 
     [Inject]
-    public void Contruct(SignalBus signalBus, CharacterData character)
+    public void Contruct(InventoryUI inventoryUI, SignalBus signalBus, CharacterData character)
     {
+        this.inventoryUI = inventoryUI;
         this.signalBus = signalBus;
         this.character = character;
 
@@ -44,49 +43,27 @@ public class KnowledgeUI : MonoBehaviour
 
     public void OpenWindow()
     {
-        if (knowledge.activeSelf)
-        {
-            this.CloseWindow();
-            return;
-        }
-
-        signalBus.Fire(UISignal.Opened());
-
-        knowledge.SetActive(true);
-        knowledgeDetails.SetActive(false);
-
-        this.LoadItems();
+        this.gameObject.SetActive(true);
+        this.inventoryUI.OpenWindow(this, false);
+        this.inventoryUI.SetExternalInventory(
+            character.Knowledge
+                .Select(x => x.Value.Definition)
+                .ToList());
     }
 
-    public void CloseWindow()
+    public void CloseWindow() => knowledge.SetActive(false);
+
+    public void CloseButtonClick() => this.closeInventoryUI();
+
+    public bool SelectItem(Item item)
     {
-        knowledge.SetActive(false);
-        signalBus.Fire(UISignal.Closed());
-        this.ClearItems();
+        var knowledgeItem = character.Knowledge[item.itemName];
+        knowledgeDetails.SelectItem(knowledgeItem);
+        return false;
     }
 
-    public void LoadItems()
-    {
-        foreach (var item in character.Knowledge.Values)
-        {
-            var controller = KnowledgeItem
-                .GetComponent<IGenerateGameObject>()
-                .Build(ItemPlaceholder, item)
-                .GetComponent<KnowledgeItemUI>();
+    public ItemType GetItemType() => ItemType.All;
 
-            controller.AssociateItem(knowledgeDetails);
 
-            knowledgeItems.Add(controller);
-        }
-    }
-
-    private void ClearItems()
-    {
-        foreach (var item in knowledgeItems)
-        {
-            item.Remove();
-        }
-
-        knowledgeItems.Clear();
-    }
+    public void AssociateCloseCall(Action closeWindow) => this.closeInventoryUI = closeWindow;
 }

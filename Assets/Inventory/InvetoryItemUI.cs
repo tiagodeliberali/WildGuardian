@@ -62,7 +62,7 @@ public class InvetoryItemUI : MonoBehaviour, IGenerateGameObject
 
     public void EnableInteractonIfType(ItemType type)
     {
-        itemButtom.interactable = type == item.type;
+        itemButtom.interactable = type == ItemType.All || type == item.type;
     }
 
     public void EnableInteraction(bool active)
