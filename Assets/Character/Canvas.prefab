@@ -1728,10 +1728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cc4f3d78b62a041b7aa6d1de856f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knowledge: {fileID: 0}
+  knowledge: {fileID: 3291767661735889822}
   knowledgeDetails: {fileID: 4424796015657960494}
-  ItemPlaceholder: {fileID: 0}
-  KnowledgeItem: {fileID: 3124193658944568725, guid: 74266cc81cc337d419cc16ec6b85ec16, type: 3}
 --- !u!114 &4424796015657960494
 MonoBehaviour:
   m_ObjectHideFlags: 0
