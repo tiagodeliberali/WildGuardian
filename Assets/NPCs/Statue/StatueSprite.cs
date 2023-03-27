@@ -14,7 +14,7 @@ public class StatueSprite : MonoBehaviour
             conversationUI.OpenWindow(portrait, new List<string>()
             {
                "Bem vinda a Ilha Poti\n\nUm paraíso ecológico que celebra a união entre a natureza e as pessoas a dezenas de gerações!",
-               "Aproveite sua visita e não esqueça de esperimentar nosso delicioso Poti ao Pesto!!"
+               "Aproveite sua visita e não esqueça de experimentar nosso delicioso Poti ao Pesto!!"
             });
         }
     }
