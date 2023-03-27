@@ -25,6 +25,9 @@ public class ShopSprite : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        shopUI.OpenUI(this.shopInventory, BuyFactor, SellFactor, ItemType);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            shopUI.OpenUI(this.shopInventory, BuyFactor, SellFactor, ItemType);
+        }
     }
 }
